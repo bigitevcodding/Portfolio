@@ -545,6 +545,7 @@ function applyContent(d) {
   if (d.categories) CONFIG.categories = d.categories;
   if (d.info) CONFIG.info = d.info;
   if (d.certs) CONFIG.certs = d.certs;
+  if (d.admin) CONFIG.admin = d.admin;
 }
 renderSite(); renderContent();
 const contentReady = fetch('content.json?v=' + Date.now(), { cache: 'no-store' })
@@ -864,7 +865,8 @@ setTimeout(() => { if (!window.__introReady) { document.getElementById('intro3d'
   .ulink { color:var(--accent); text-decoration:underline; text-underline-offset:3px }
 
   .adm { font-family:'Inter Tight', system-ui, sans-serif; color:var(--fg) }
-  .adm-bar { position:fixed; left:50%; bottom:20px; transform:translateX(-50%); z-index:240; display:flex; align-items:center; gap:6px; padding:6px 6px 6px 16px; background:var(--fg); color:var(--bg); border-radius:999px; box-shadow:0 12px 40px rgba(0,0,0,.25); font-size:13px; white-space:nowrap; max-width:calc(100vw - 24px); overflow-x:auto }
+  html.adm-drawer-open .adm-bar { left:calc((100vw - min(480px, 100vw)) / 2) }   /* la barre se décale quand le panneau est ouvert */
+  .adm-bar { position:fixed; left:50%; bottom:20px; transform:translateX(-50%); z-index:255; transition:left .6s var(--ease); display:flex; align-items:center; gap:6px; padding:6px 6px 6px 16px; background:var(--fg); color:var(--bg); border-radius:999px; box-shadow:0 12px 40px rgba(0,0,0,.25); font-size:13px; white-space:nowrap; max-width:calc(100vw - 24px); overflow-x:auto }
   .adm-bar .st { display:flex; align-items:center; gap:8px; margin-right:6px } .adm-bar .st i { width:7px; height:7px; border-radius:50%; background:var(--accent) }
   .adm-bar button { padding:8px 14px; border-radius:999px; color:inherit; transition:background .25s } .adm-bar button:hover { background:rgba(127,127,127,.25) }
   .adm-bar button.pub { background:var(--accent); color:#fff } .adm-bar button.pub:hover { background:var(--accent); filter:brightness(1.1) }
@@ -932,7 +934,7 @@ setTimeout(() => { if (!window.__introReady) { document.getElementById('intro3d'
     });
   }
   function exportContent() {
-    return JSON.parse(JSON.stringify({ site: CONFIG.site, categories: CONFIG.categories, info: CONFIG.info, certs: CONFIG.certs }, (k, v) => k.startsWith('_') ? undefined : v));
+    return JSON.parse(JSON.stringify({ site: CONFIG.site, categories: CONFIG.categories, info: CONFIG.info, certs: CONFIG.certs, admin: CONFIG.admin }, (k, v) => k.startsWith('_') ? undefined : v));
   }
 
   /* ---------- Images : redimensionnées dans le navigateur avant l'envoi ---------- */
@@ -998,9 +1000,9 @@ setTimeout(() => { if (!window.__introReady) { document.getElementById('intro3d'
   const drawer = h('aside', { class: 'adm adm-drawer', 'data-lenis-prevent': '' });
   function openDrawer(title, kicker, ...content) {
     drawer.replaceChildren(h('div', { class: 'adm-head' }, h('span', { class: 'mono muted' }, kicker), h('button', { class: 'adm-x', onclick: closeDrawer }, '✕')), h('h2', {}, title), ...content);
-    drawer.classList.add('open'); drawer.scrollTop = 0;
+    drawer.classList.add('open'); drawer.scrollTop = 0; root.classList.add('adm-drawer-open');
   }
-  function closeDrawer() { drawer.classList.remove('open'); }
+  function closeDrawer() { drawer.classList.remove('open'); root.classList.remove('adm-drawer-open'); }
 
   function editItem(id) {
     const it = findItem(id); if (!it) return;
@@ -1038,7 +1040,7 @@ setTimeout(() => { if (!window.__introReady) { document.getElementById('intro3d'
           h('select', { onchange: e => { c.cols = +e.target.value; changed(); } }, h('option', { value: 3, selected: c.cols !== 4 ? 'selected' : false }, '3 colonnes'), h('option', { value: 4, selected: c.cols === 4 ? 'selected' : false }, '4 colonnes')))),
         'Ajouter une catégorie', () => ({ id: 'cat' + Date.now().toString(36), num: '', title: 'Nouvelle catégorie', sub: '', items: [{ title: 'Title', text: '' }] }))),
       h('div', { class: 'adm-row adm-sec' }, field('Pied de page (gauche)', txt(s, 'footerLeft')), field('Pied de page (droite)', txt(s, 'footerRight'))),
-      h('div', { class: 'adm-sec' }, h('h3', {}, 'Sécurité'), h('button', { class: 'adm-btn danger', onclick: logout }, 'Déconnecter GitHub de cet appareil')));
+      h('div', { class: 'adm-sec' }, h('h3', {}, 'Sécurité'), h('div', { class: 'adm-row', style: 'flex-wrap:wrap' }, h('button', { class: 'adm-btn', onclick: changeCodeModal }, 'Changer le code'), h('button', { class: 'adm-btn danger', onclick: logout }, 'Déconnecter GitHub de cet appareil'))));
   }
   function editInfo() {
     const I = CONFIG.info; I.facts = I.facts || []; I.blocks = I.blocks || [];
@@ -1114,16 +1116,18 @@ setTimeout(() => { if (!window.__introReady) { document.getElementById('intro3d'
      Le code n'est PAS écrit dans le site : seule son empreinte PBKDF2 (600 000 itérations) l'est.
      Pour changer de code, demande une nouvelle empreinte (salt + hash) et remplace ADMIN_AUTH. */
   const ADMIN_AUTH = { salt: '189f3ae62c69e9a3c3d8cbacee9f55d6', hash: 'bae31d8068b210e20d777a7cc7594d2a1c99a1e9d226cd9110942a5ca4fee173', iter: 600000 };
+  // Un code changé depuis le mode admin est publié dans content.json et remplace celui-ci
+  const auth = () => (CONFIG.admin && CONFIG.admin.hash) ? CONFIG.admin : ADMIN_AUTH;
   const te = new TextEncoder();
   const hex = buf => [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, '0')).join('');
   const unhex = s => new Uint8Array(s.match(/../g).map(x => parseInt(x, 16)));
   async function baseKey(code) { return crypto.subtle.importKey('raw', te.encode(code), 'PBKDF2', false, ['deriveBits', 'deriveKey']); }
   async function checkCode(code) {
-    const bits = await crypto.subtle.deriveBits({ name: 'PBKDF2', salt: unhex(ADMIN_AUTH.salt), iterations: ADMIN_AUTH.iter, hash: 'SHA-256' }, await baseKey(code), 256);
-    return hex(bits) === ADMIN_AUTH.hash;
+    const A = auth(), bits = await crypto.subtle.deriveBits({ name: 'PBKDF2', salt: unhex(A.salt), iterations: A.iter, hash: 'SHA-256' }, await baseKey(code), 256);
+    return hex(bits) === A.hash;
   }
   // Le jeton GitHub est chiffré (AES-GCM) avec une clé tirée du code, puis gardé sur cet appareil
-  async function aesKey(code) { return crypto.subtle.deriveKey({ name: 'PBKDF2', salt: te.encode(ADMIN_AUTH.salt + ':token'), iterations: ADMIN_AUTH.iter, hash: 'SHA-256' }, await baseKey(code), { name: 'AES-GCM', length: 256 }, false, ['encrypt', 'decrypt']); }
+  async function aesKey(code) { return crypto.subtle.deriveKey({ name: 'PBKDF2', salt: te.encode(auth().salt + ':token'), iterations: auth().iter, hash: 'SHA-256' }, await baseKey(code), { name: 'AES-GCM', length: 256 }, false, ['encrypt', 'decrypt']); }
   async function sealToken(cfg, code) {
     const iv = crypto.getRandomValues(new Uint8Array(12));
     const ct = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, await aesKey(code), te.encode(cfg.token));
@@ -1155,6 +1159,28 @@ setTimeout(() => { if (!window.__introReady) { document.getElementById('intro3d'
       h('h2', { style: 'font-size:26px;font-weight:500;letter-spacing:-.03em;margin:6px 0 18px' }, 'Code d\'accès'),
       field('Code', input), err, h('div', { style: 'margin-top:10px' }, btn)));
     document.body.append(modal); setTimeout(() => input.focus(), 50);
+  }
+
+  function changeCodeModal() {
+    const a = h('input', { type: 'password', autocomplete: 'new-password', placeholder: '12 caractères minimum' }), b = h('input', { type: 'password', autocomplete: 'new-password' }), err = h('div', { class: 'adm-err' });
+    const modal = h('div', { class: 'adm adm-modal' }, h('div', { class: 'adm-card' },
+      h('div', { class: 'adm-head' }, h('span', { class: 'mono muted' }, 'Sécurité'), h('button', { class: 'adm-x', onclick: () => modal.remove() }, '✕')),
+      h('h2', { style: 'font-size:26px;font-weight:500;letter-spacing:-.03em;margin:6px 0 10px' }, 'Changer le code'),
+      h('p', { class: 'muted', style: 'font-size:14px;margin-bottom:16px' }, 'Le nouveau code devient actif en ligne quand tu cliques sur « Publier ». Seule son empreinte chiffrée est enregistrée.'),
+      field('Nouveau code', a), field('Confirmer', b), err,
+      h('button', { class: 'adm-btn acc', style: 'margin-top:10px', onclick: async e => {
+        const v = a.value;
+        if (v.length < 12) { err.textContent = 'Au moins 12 caractères.'; return; }
+        if (v !== b.value) { err.textContent = 'Les deux codes ne sont pas identiques.'; return; }
+        if (!/[a-z]/.test(v) || !/[A-Z]/.test(v) || !/[0-9]/.test(v)) { err.textContent = 'Mélange majuscules, minuscules et chiffres.'; return; }
+        e.target.disabled = true; e.target.textContent = 'Calcul…';
+        const salt = hex(crypto.getRandomValues(new Uint8Array(16))), iter = 600000;
+        const bits = await crypto.subtle.deriveBits({ name: 'PBKDF2', salt: unhex(salt), iterations: iter, hash: 'SHA-256' }, await baseKey(v), 256);
+        CONFIG.admin = { salt, hash: hex(bits), iter }; CODE = v;
+        if (ADMIN.cfg) store.set(TOKEN_BOX, await sealToken(ADMIN.cfg, v));    // le jeton GitHub est rechiffré avec le nouveau code
+        modal.remove(); changed(); toast('Nouveau code prêt. Clique sur « Publier » pour l\'activer en ligne.', 6000);
+      } }, 'Enregistrer le nouveau code')));
+    document.body.append(modal); setTimeout(() => a.focus(), 50);
   }
 
   // Demandé une seule fois par appareil, au premier « Publier »
