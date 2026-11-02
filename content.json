@@ -196,9 +196,8 @@
     ],
     "blocks": [
       {
-        "label": "Ma vidéo",
-        "video": "",
-        "caption": "Mon parcours, pourquoi l'informatique, le sport… en quelques minutes."
+        "label": "Nouveau bloc",
+        "image": ""
       },
       {
         "label": "Me concernant",
