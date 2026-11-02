@@ -1,0 +1,248 @@
+{
+  "site": {
+    "firstName": "Tévin",
+    "lastName": "Bouvet",
+    "eyebrow": "",
+    "tagline": "",
+    "sub": "Infrastructure, réseaux & cybersécurité",
+    "statement": "Je construis, j'administre et je *sécurise* des infrastructures. Alternant chez OPmobility, futur *ingénieur* *cybersécurité.*",
+    "email": "ton.email@exemple.com",
+    "links": [
+      {
+        "label": "LinkedIn",
+        "href": "https://www.linkedin.com/in/tevin-bouvet/"
+      },
+      {
+        "label": "GitHub",
+        "href": "https://github.com/bigitevcodding"
+      },
+      {
+        "label": "CV",
+        "href": "cv.pdf"
+      }
+    ],
+    "footerLeft": "© 2026 Tévin Bouvet",
+    "footerRight": "BTS SIO — SISR"
+  },
+  "categories": [
+    {
+      "id": "entreprise",
+      "num": "01",
+      "title": "En entreprise",
+      "sub": "Missions en alternance",
+      "items": [
+        {
+          "title": "Déplacer le cœur de réseau sans coupure",
+          "text": "Déplacement des deux switchs cœur d'un centre de R&D vers une baie voisine, pendant la pause de midi, sans aucune interruption.",
+          "image": "img/schema-deplacement-core.svg",
+          "tags": [
+            "Réseau",
+            "Datacenter",
+            "Continuité de service"
+          ],
+          "meta": [
+            [
+              "Cadre",
+              "Alternance OPmobility"
+            ],
+            [
+              "Créneau",
+              "Pause de midi"
+            ],
+            [
+              "Coupure",
+              "Aucune"
+            ]
+          ],
+          "blocks": [
+            {
+              "label": "Contexte",
+              "text": "Le cœur du réseau du centre de R&D repose sur deux switchs cœur. Tous les switchs d'accès s'y raccordent et l'ensemble des VLAN y transite : s'ils s'arrêtent, tout le réseau du site tombe.\n\nIls devaient être déplacés dans une baie voisine du datacenter. Or des machines de R&D tournent en continu sur le réseau : une coupure pouvait interrompre des essais et entraîner des pertes financières importantes."
+            },
+            {
+              "label": "Pourquoi c'est critique",
+              "image": "img/schema-role-core.svg",
+              "caption": "Tout le trafic du site passe par les deux switchs cœur."
+            },
+            {
+              "label": "Objectif",
+              "text": "Installer les deux switchs cœur dans la baie voisine sans interrompre ni les VLAN ni les switchs raccordés, dans le créneau de la pause de midi.\n\nL'atout : chaque switch possède deux alimentations. Une seule suffit à le faire fonctionner, ce qui rend le déplacement possible à chaud."
+            },
+            {
+              "label": "Déroulement",
+              "text": "1. Retrait de la tablette rack qui portait les deux switchs.\n2. Débranchement d'une des deux alimentations de chaque switch : il continue de tourner sur la seconde.\n3. Déplacement des switchs dans la baie voisine, câbles réseau toujours connectés grâce à leur longueur et à leur redondance.\n4. Branchement de l'alimentation libre sur la multiprise (PDU) de la nouvelle baie.\n5. Bascule de la seconde alimentation vers la nouvelle baie."
+            },
+            {
+              "label": "Les étapes en schéma",
+              "image": "img/schema-deplacement-core.svg",
+              "caption": "À chaque instant, chaque switch garde au moins une alimentation active."
+            },
+            {
+              "label": "Vérifications et résultat",
+              "text": "Contrôle de chaque réseau et sous-réseau (VLAN), état des switchs vérifié : tous les voyants au vert.\n\nDéplacement terminé pendant la pause de midi, sans aucune coupure ni problème constaté. Les machines de R&D ont continué de fonctionner normalement."
+            },
+            {
+              "label": "Compétences",
+              "list": [
+                "Gestion du patrimoine informatique",
+                "Continuité de service",
+                "Redondance électrique",
+                "Travail en équipe",
+                "Intervention en datacenter"
+              ]
+            },
+            {
+              "label": "Ce que j'ajouterais",
+              "text": "Un plan de retour arrière écrit avant de commencer, un ping continu vers quelques équipements clés pendant le déplacement pour prouver l'absence de coupure, un relevé de l'état des switchs avant et après, et la mise à jour du plan de baie."
+            }
+          ]
+        },
+        {
+          "title": "Title",
+          "text": "Écris ce que tu veux ici."
+        },
+        {
+          "title": "Title",
+          "text": "Écris ce que tu veux ici."
+        }
+      ]
+    },
+    {
+      "id": "bts",
+      "num": "02",
+      "title": "BTS SIO",
+      "sub": "Réalisations scolaires",
+      "items": [
+        {
+          "title": "Title",
+          "text": "Écris ce que tu veux ici."
+        },
+        {
+          "title": "Title",
+          "text": "Écris ce que tu veux ici."
+        },
+        {
+          "title": "Title",
+          "text": "Écris ce que tu veux ici."
+        }
+      ]
+    },
+    {
+      "id": "perso",
+      "num": "03",
+      "title": "Projets perso",
+      "sub": "Homelab & expérimentations",
+      "items": [
+        {
+          "title": "Title",
+          "text": "Écris ce que tu veux ici."
+        },
+        {
+          "title": "Title",
+          "text": "Écris ce que tu veux ici."
+        },
+        {
+          "title": "Title",
+          "text": "Écris ce que tu veux ici."
+        }
+      ]
+    },
+    {
+      "id": "passions",
+      "num": "04",
+      "title": "Passions",
+      "sub": "Ce que j'aime",
+      "cols": 4,
+      "unit": "passion",
+      "items": [
+        {
+          "title": "Title",
+          "text": "Écris ce que tu veux ici."
+        },
+        {
+          "title": "Title",
+          "text": "Écris ce que tu veux ici."
+        },
+        {
+          "title": "Title",
+          "text": "Écris ce que tu veux ici."
+        },
+        {
+          "title": "Title",
+          "text": "Écris ce que tu veux ici."
+        }
+      ]
+    }
+  ],
+  "info": {
+    "headline": "Étudiant, alternant, futur <span class=\"serif accent\">ingénieur</span>.",
+    "facts": [
+      [
+        "Formation",
+        "BTS SIO — SISR"
+      ],
+      [
+        "Entreprise",
+        "OPmobility"
+      ],
+      [
+        "Objectif",
+        "École d'ingénieur"
+      ],
+      [
+        "Domaine",
+        "Cybersécurité"
+      ]
+    ],
+    "blocks": [
+      {
+        "label": "Ma vidéo",
+        "video": "",
+        "caption": "Mon parcours, pourquoi l'informatique, le sport… en quelques minutes."
+      },
+      {
+        "label": "À propos",
+        "text": "Écris ici ta présentation."
+      },
+      {
+        "label": "Parcours",
+        "text": "Écris ici ton parcours."
+      },
+      {
+        "label": "Compétences",
+        "list": [
+          "Ajoute",
+          "tes",
+          "compétences"
+        ]
+      }
+    ]
+  },
+  "certs": {
+    "title": "Certifications",
+    "intro": "Les certifications que je prépare et celles que je vise, pour valider mes compétences en réseau, cloud et sécurité.",
+    "items": [
+      {
+        "name": "Cisco CCNA",
+        "issuer": "Cisco",
+        "date": "",
+        "status": "Objectif",
+        "text": "Réseaux, routage, commutation, VLAN et sécurité de base."
+      },
+      {
+        "name": "Azure Fundamentals (AZ-900)",
+        "issuer": "Microsoft",
+        "date": "",
+        "status": "En préparation",
+        "text": "Fondamentaux du cloud et des services Azure."
+      },
+      {
+        "name": "Azure Administrator (AZ-104)",
+        "issuer": "Microsoft",
+        "date": "",
+        "status": "Objectif",
+        "text": "Administration d'Azure : identités, réseau, stockage, calcul."
+      }
+    ]
+  }
+}
