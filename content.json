@@ -4,9 +4,9 @@
     "lastName": "Bouvet",
     "eyebrow": "",
     "tagline": "",
-    "sub": "Infrastructure, réseaux & cybersécurité",
-    "statement": "Je construis, j'administre et je *sécurise* des infrastructures. Alternant chez OPmobility, futur *ingénieur* *cybersécurité.*",
-    "email": "ton.email@exemple.com",
+    "sub": "Infrastructure, *réseaux* & cybersécurité",
+    "statement": "Je *construis*, j'administre et je *sécurise* des infrastructures. Alternant chez OPmobility, futur *ingénieur* *cybersécurité.*",
+    "email": "tevinbouvetpro@gmail.com",
     "links": [
       {
         "label": "LinkedIn",
@@ -221,28 +221,6 @@
   "certs": {
     "title": "Certifications",
     "intro": "Les certifications que je prépare et celles que je vise, pour valider mes compétences en réseau, cloud et sécurité.",
-    "items": [
-      {
-        "name": "Cisco CCNA",
-        "issuer": "Cisco",
-        "date": "",
-        "status": "Objectif",
-        "text": "Réseaux, routage, commutation, VLAN et sécurité de base."
-      },
-      {
-        "name": "Azure Fundamentals (AZ-900)",
-        "issuer": "Microsoft",
-        "date": "",
-        "status": "En préparation",
-        "text": "Fondamentaux du cloud et des services Azure."
-      },
-      {
-        "name": "Azure Administrator (AZ-104)",
-        "issuer": "Microsoft",
-        "date": "",
-        "status": "Objectif",
-        "text": "Administration d'Azure : identités, réseau, stockage, calcul."
-      }
-    ]
+    "items": []
   }
 }
