@@ -175,11 +175,11 @@
     }
   ],
   "info": {
-    "headline": "Étudiant, alternant, futur <span class=\"serif accent\">ingénieur</span>.",
+    "headline": "Étudiant en <span class=\"serif accent\">alternance</span>.",
     "facts": [
       [
         "Formation",
-        "BTS SIO — SISR"
+        "BTS SIO / SISR"
       ],
       [
         "Entreprise",
@@ -201,19 +201,17 @@
         "caption": "Mon parcours, pourquoi l'informatique, le sport… en quelques minutes."
       },
       {
-        "label": "À propos",
-        "text": "Écris ici ta présentation."
+        "label": "Me concernant",
+        "text": "Je m’appelle Tévin, j’ai 22 ans et je prépare un BTS SIO option SISR en alternance. Je me spécialise dans les infrastructures, les réseaux et la cybersécurité, un domaine qui me passionne et dans lequel je progresse à travers des projets concrets, comme la mise en place de mon propre homelab.\n\nPassionné de sport, et particulièrement de course à pied, je cultive au quotidien des qualités que je mets aussi au service de mon travail : rigueur, régularité et persévérance. Comme en course, j’avance étape par étape avec un objectif clair.\n\nCurieux et investi, je souhaite continuer à développer mes compétences techniques et contribuer à des projets au sein d’une équipe."
       },
       {
-        "label": "Parcours",
-        "text": "Écris ici ton parcours."
+        "label": "Un parcours construit sur l’expérience",
+        "text": "J’ai obtenu mon baccalauréat en 2022, avec les spécialités LLCER (Langues, Littératures et Cultures Étrangères et Régionales) et HGGSP (Histoire-Géographie, Géopolitique et Sciences Politiques). Une formation qui m’a appris à analyser, à argumenter et à m’exprimer avec clarté.\n\nAprès le bac, j’ai choisi d’entrer directement dans la vie active, pour gagner mon indépendance et développer des compétences qu’aucune salle de classe ne m’aurait apportées : le travail en équipe, le sens des responsabilités dès un jeune âge, l’autonomie et la capacité à m’adapter.\n\nAu fil de rencontres marquantes, j’ai compris que je voulais faire ce qui me passionne, et m’y investir pleinement. C’est ce qui m’a conduit vers l’informatique. J’ai repris mes études en septembre 2025 avec un BTS SIO option SISR, en alternance, pour allier théorie et pratique."
       },
       {
         "label": "Compétences",
         "list": [
-          "Ajoute",
-          "tes",
-          "compétences"
+          "Minutie · Rigueur · Autonomie · Curiosité · Sens de la documentation · Pédagogie · Sang-froid · Esprit de sécurité · Persévérance · Adaptabilité"
         ]
       }
     ]
