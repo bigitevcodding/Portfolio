@@ -99,43 +99,62 @@
         },
         {
           "title": "Équiper un nouvel espace de stockage en réseau et en Wi-Fi",
-          "text": "Création et administration du réseau d’un nouvel espace de stockage OPmobility : deux switchs, un par tente, et 14 bornes Wi-Fi pour connecter les scanettes des opérateurs.",
+          "text": "Création et administration du réseau d'un nouvel espace de stockage : deux switchs, un par tente, et 14 bornes Wi-Fi pour connecter les scanettes des opérateurs.",
           "blocks": [
             {
               "label": "Contexte",
-              "text": ""
+              "text": "OPmobility a ouvert un nouvel espace de stockage composé de deux tentes voisines. Les opérateurs y utilisent des scanettes qui lisent les codes-barres des pièces : elles ont besoin d’une couverture Wi-Fi fiable dans toute la zone."
             },
             {
               "label": "Objectif",
-              "text": ""
+              "text": "Raccorder les deux tentes au réseau du site et assurer une couverture Wi-Fi complète pour les scanettes."
+            },
+            {
+              "label": "Implantation",
+              "image": "img/uploads/mw0gl0og-implantation-tentes.webp",
+              "caption": "Implantation des deux tentes et des bornes"
             },
             {
               "label": "Réalisation",
-              "text": ""
+              "text": "J’ai créé et administré deux switchs, un par tente, pour raccorder l’espace au réseau du site. J’ai déployé 14 bornes Wi-Fi : 10 dans la première tente et 4 dans la seconde, plus petite. Les bornes sont placées dans le VLAN 91 et les scanettes dans le VLAN 555 : séparer ces flux isole les terminaux des opérateurs du reste du réseau et permet de mieux contrôler leurs accès."
+            },
+            {
+              "label": "Topologie",
+              "image": "img/uploads/mw0glgx9-topologie-stockage-wifi.webp",
+              "caption": "Topologie réseau (VLAN réels, adresses IP fictives"
             },
             {
               "label": "Résultat",
-              "text": ""
+              "text": "Les deux tentes sont couvertes en Wi-Fi et les scanettes fonctionnent dans tout l’espace de stockage."
+            },
+            {
+              "label": "Compétences",
+              "text": "Administration de switchs, Déploiement Wi-Fi, Segmentation VLAN, Mise en service d'un réseau"
             }
           ],
           "meta": [
             [
-              "Année",
-              "2026"
+              "Cadre",
+              "Alternance OPmobility"
             ],
             [
-              "Rôle",
-              ""
+              "Équipements",
+              "2 switchs, 14 bornes Wi-Fi"
             ],
             [
-              "Outils",
-              ""
+              "Segmentation",
+              "VLAN 91 (bornes) · VLAN 555 (scanettes"
             ]
           ],
           "tags": [
-            "Network",
-            "Vlan"
-          ]
+            "Switching",
+            "Wi-fi",
+            "VLAN",
+            "Logistique",
+            "management"
+          ],
+          "image": "img/uploads/mw0giigt-implantation-tentes.webp",
+          "year": "2026"
         },
         {
           "title": "Title",
