@@ -273,6 +273,15 @@
   "certs": {
     "title": "Certifications",
     "intro": "Les certifications que je prépare et celles que je vise, pour valider mes compétences en réseau, cloud et sécurité.",
-    "items": []
+    "items": [
+      {
+        "name": "Le RGPD et ses notions clés ",
+        "issuer": "CNIL",
+        "date": "26 Octobre 2026",
+        "status": "Obtenu",
+        "text": "Bases du RGPD et de la protection des données personnelles, avec la CNIL : le cadre légal derrière la sécurité des systèmes.",
+        "image": "img/uploads/mw0hi1u6-cnil.webp"
+      }
+    ]
   }
 }
