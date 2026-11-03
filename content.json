@@ -98,8 +98,44 @@
           ]
         },
         {
-          "title": "Title",
-          "text": "Écris ce que tu veux ici."
+          "title": "Équiper un nouvel espace de stockage en réseau et en Wi-Fi",
+          "text": "Création et administration du réseau d’un nouvel espace de stockage OPmobility : deux switchs, un par tente, et 14 bornes Wi-Fi pour connecter les scanettes des opérateurs.",
+          "blocks": [
+            {
+              "label": "Contexte",
+              "text": ""
+            },
+            {
+              "label": "Objectif",
+              "text": ""
+            },
+            {
+              "label": "Réalisation",
+              "text": ""
+            },
+            {
+              "label": "Résultat",
+              "text": ""
+            }
+          ],
+          "meta": [
+            [
+              "Année",
+              "2026"
+            ],
+            [
+              "Rôle",
+              ""
+            ],
+            [
+              "Outils",
+              ""
+            ]
+          ],
+          "tags": [
+            "Network",
+            "Vlan"
+          ]
         },
         {
           "title": "Title",
