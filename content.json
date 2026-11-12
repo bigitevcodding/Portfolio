@@ -157,8 +157,53 @@
           "year": "2026"
         },
         {
-          "title": "Title",
-          "text": "Écris ce que tu veux ici."
+          "title": "Renouvellement du parc Wi-Fi du site : 120 bornes",
+          "text": "Le site comptait 120 bornes Wi-Fi vieillissantes. L’objectif était de les remplacer par des bornes Cisco plus puissantes, qui couvrent une plus grande surface, et de renforcer la sécurité. Les réseaux diffusés sont maintenant séparés selon l’usage de chaque borne, pour qu’un équipement ne puisse joindre que le réseau qui le concerne.",
+          "blocks": [
+            {
+              "label": "Objectif",
+              "text": "Migrer l’ensemble des bornes sans interrompre le Wi-Fi pour les utilisateurs, en appliquant à chaque port de switch une configuration standardisée et identique sur tout le sit"
+            },
+            {
+              "label": "Réalisation",
+              "text": "Les nouvelles bornes Cisco sont gérées par un contrôleur Wi-Fi Cisco hébergé sur une machine virtuelle. Le contrôleur centralise la configuration des bornes et la diffusion des réseaux selon leur usage.\n\nCôté switchs, chaque port qui accueille une borne est configuré à partir d’un template d’interface préparé à l’avance, « Borne-Wifi », qui porte le VLAN des bornes (appelé ici VLAN 101). Ce template évite les erreurs de saisie et garantit la même configuration sur les 120 ports.\n\nPour chaque borne :\n\nJ’identifie le port sur lequel elle est branchée avec CDP. Les bornes sont nommées avec leur numéro, ce qui permet de les retrouver directement sur le switch.\nJe remets le port à zéro pour repartir d’une base propre.\nJ’applique le template « Borne-Wifi ».\nJe vérifie que la borne remonte sur le contrôleur.\n\nUne fois toutes les bornes d’un switch migrées, je contrôle la"
+            },
+            {
+              "label": "Code : Procédure par borne",
+              "text": "how cdp neighbors                      ! repérer la borne et son port\ndefault interface Te1/0/12              ! remettre le port par défaut\ninterface Te1/0/12\n source template Borne-Wifi             ! appliquer le template préparé\nend\nshow running-config interface Te1/0/12  ! vérifier la config du port"
+            },
+            {
+              "label": "Difficulté rencontrée",
+              "text": "Sur le switch 12, les bornes ne fonctionnaient pas alors que la procédure était identique. En analysant la configuration, j’ai constaté que le template « Borne-Wifi » n’existait tout simplement pas sur ce switch : la commande ne pouvait donc rien appliquer. J’ai créé le template sur le switch 12, je l’ai réappliqué aux ports concernés, puis j’ai vérifié que les bornes remontaient correctement.\n\nCe que j’en retiens : avant un déploiement en masse, il faut vérifier que les prérequis existent sur chaque équipement, et ne pas supposer que tous les switchs sont configurés pareil."
+            },
+            {
+              "label": "Coordination du prestataire",
+              "text": "L’installation physique des bornes en hauteur était confiée à un prestataire. J’ai coordonné son intervention avec la configuration : pendant qu’il posait les bornes, je configurais les ports correspondants. Il fallait donc synchroniser l’ordre de pose, la configuration des ports et la vérification de chaque borne."
+            },
+            {
+              "label": "Résultat",
+              "text": "Migration terminée en 3 jours au lieu des 5 prévus, sans coupure pour les utilisateurs.\nPlus aucune zone blanche sur le site : les nouvelles bornes, plus puissantes, et leur placement recalculé couvrent toute la surface.\nRéseaux séparés par usage : chaque équipement n’accède qu’au réseau qui le concerne, ce qui limite la propagation en cas d’incident.\nConfiguration homogène et vérifiée sur l’ensemble des switchs grâce au template et au contrôle port par port."
+            },
+            {
+              "label": "Compétences mobilisées",
+              "text": "Configuration de switchs Cisco en ligne de commande\nTemplates d’interface (standardisation de la configuration)\nContrôleur Wi-Fi Cisco virtualisé (gestion centralisée des bornes)\nDécouverte des équipements avec CDP\nSegmentation réseau par VLAN et par usage\nDiagnostic d’une panne de configuration\nVérification systématique après déploiement\nCoordination d’un prestataire externe et respect du planning"
+            }
+          ],
+          "meta": [
+            [
+              "Année",
+              "2026"
+            ],
+            [
+              "Lieu",
+              "En entreprise au sein d'OPmobility"
+            ],
+            [
+              "tags",
+              "Cisco, wifi, contrôleur, wlc,vlan,template"
+            ]
+          ],
+          "year": "2026"
         }
       ]
     },
