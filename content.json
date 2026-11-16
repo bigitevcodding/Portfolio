@@ -296,7 +296,7 @@
         {
           "title": "Mon portfolio : conception, hébergement et sécurité",
           "text": "Un site conçu et administré de A à Z : code versionné sur GitHub, déploiement automatique sur Vercel, domaine sur Cloudflare, administration sécurisée et veille automatisée.",
-          "image": "img/portfolio-github.webp",
+          "image": "img/portfolio-cover.webp",
           "year": "2026",
           "tags": [
             "GitHub",
