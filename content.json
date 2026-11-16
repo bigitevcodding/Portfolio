@@ -332,7 +332,6 @@
   "veille": {
     "subject": "L'intelligence artificielle en entreprise",
     "intro": "Je suis l'arrivée de l'IA générative et des agents IA dans les entreprises : ce qu'ils apportent, les risques qu'ils créent pour la sécurité et les données, et le cadre légal qui les encadre.",
-    "method": "À compléter : tes outils (alertes, agrégateur RSS, réseaux), le temps que tu y passes chaque semaine, et comment tu choisis une source fiable. Chaque source est notée dans le tableau d'analyse (pertinence, date, fiabilité de l'auteur).",
     "articles": [
       {
         "date": "30 octobre 2026",
@@ -346,7 +345,17 @@
           "Accès réduits au strict nécessaire, environnements séparés et journaux protégés pour tracer chaque action."
         ],
         "impact": "Avant de brancher un agent IA sur le SI, le service informatique doit définir ses droits, ses limites et qui valide ses actions.",
-        "avis": "À compléter : ton avis en une ou deux phrases."
+        "avis": "À compléter : ton avis en une ou deux phrases.",
+        "iso": "2026-10-30",
+        "author": "ANSSI",
+        "site": "cyber.gouv.fr",
+        "keywords": "IA agentique, agents IA, autonomie, contrôle humain, journalisation",
+        "type": "Cybersécurité",
+        "notes": {
+          "pertinence": 4,
+          "date": 4,
+          "auteur": 4
+        }
       },
       {
         "date": "9 octobre 2026",
@@ -360,7 +369,17 @@
           "Les attaques automatisées par IA augmentent, avec des robots qui imitent de mieux en mieux les humains."
         ],
         "impact": "Les équipes de sécurité doivent elles aussi s'outiller en IA pour détecter plus vite des attaques plus nombreuses.",
-        "avis": "À compléter : ton avis en une ou deux phrases."
+        "avis": "À compléter : ton avis en une ou deux phrases.",
+        "iso": "2026-10-09",
+        "author": "Sébastien Gavois (Next)",
+        "site": "next.ink",
+        "keywords": "agents IA, cyberattaques, défense, ANSSI",
+        "type": "Cybersécurité",
+        "notes": {
+          "pertinence": 3,
+          "date": 4,
+          "auteur": 3
+        }
       },
       {
         "date": "29 juin 2026",
@@ -374,7 +393,17 @@
           "Les produits qui intègrent de l'IA (dispositifs médicaux, jouets) ont jusqu'à août 2028."
         ],
         "impact": "Le report laisse plus de temps aux entreprises, mais l'inventaire des usages d'IA et leur classement par niveau de risque restent à faire dès maintenant.",
-        "avis": "À compléter : ton avis en une ou deux phrases."
+        "avis": "À compléter : ton avis en une ou deux phrases.",
+        "iso": "2026-06-29",
+        "author": "BEUC",
+        "site": "beuc.eu",
+        "keywords": "AI Act, omnibus numérique, haut risque, réglementation",
+        "type": "Juridique / réglementaire",
+        "notes": {
+          "pertinence": 3,
+          "date": 4,
+          "auteur": 3
+        }
       },
       {
         "date": "15 avril 2026",
@@ -388,7 +417,17 @@
           "Si on les teste, c'est dans un environnement isolé, sans données sensibles et avec l'accord de la DSI."
         ],
         "impact": "La DSI doit encadrer ces outils dans sa charte informatique et bloquer leur installation sur les postes tant qu'ils ne sont pas validés.",
-        "avis": "À compléter : ton avis en une ou deux phrases."
+        "avis": "À compléter : ton avis en une ou deux phrases.",
+        "iso": "2026-04-15",
+        "author": "Matthieu Eugène (Blog du Modérateur), d'après le CERT-FR",
+        "site": "blogdumoderateur.com",
+        "keywords": "agents IA, OpenClaw, poste de travail, fuite de données",
+        "type": "Cybersécurité",
+        "notes": {
+          "pertinence": 4,
+          "date": 4,
+          "auteur": 3
+        }
       },
       {
         "date": "4 février 2026",
@@ -402,7 +441,17 @@
           "Les systèmes d'IA sont aussi des cibles : empoisonnement des modèles, fuite de données, chaîne d'approvisionnement logicielle."
         ],
         "impact": "Sensibiliser les utilisateurs à un hameçonnage plus crédible devient prioritaire, tout comme protéger les outils d'IA de l'entreprise.",
-        "avis": "À compléter : ton avis en une ou deux phrases."
+        "avis": "À compléter : ton avis en une ou deux phrases.",
+        "iso": "2026-02-04",
+        "author": "ANSSI",
+        "site": "cyber.gouv.fr",
+        "keywords": "IA générative, menace, cyberattaques, empoisonnement",
+        "type": "Cybersécurité",
+        "notes": {
+          "pertinence": 4,
+          "date": 4,
+          "auteur": 4
+        }
       },
       {
         "date": "4 octobre 2024",
@@ -416,7 +465,17 @@
           "Il donne des conseils de sécurité aux responsables et aux développeurs."
         ],
         "impact": "Une entreprise doit choisir quels assistants de code sont autorisés et faire relire le code qu'ils produisent.",
-        "avis": "À compléter : ton avis en une ou deux phrases."
+        "avis": "À compléter : ton avis en une ou deux phrases.",
+        "iso": "2024-10-04",
+        "author": "ANSSI / BSI",
+        "site": "cyber.gouv.fr",
+        "keywords": "assistants de code, IA, développement sécurisé",
+        "type": "Cybersécurité",
+        "notes": {
+          "pertinence": 3,
+          "date": 2,
+          "auteur": 4
+        }
       },
       {
         "date": "29 avril 2024",
@@ -430,7 +489,17 @@
           "Conseils : cloisonner le système, maîtriser les données utilisées et ne pas laisser l'IA agir seule sur des actions critiques."
         ],
         "impact": "Un assistant IA interne doit être traité comme un service sensible : analyse de risques, droits limités, journalisation.",
-        "avis": "À compléter : ton avis en une ou deux phrases."
+        "avis": "À compléter : ton avis en une ou deux phrases.",
+        "iso": "2024-04-29",
+        "author": "ANSSI",
+        "site": "cyber.gouv.fr",
+        "keywords": "IA générative, recommandations, cycle de vie, sécurité",
+        "type": "Cybersécurité",
+        "notes": {
+          "pertinence": 4,
+          "date": 2,
+          "auteur": 4
+        }
       },
       {
         "date": "8 avril 2024",
@@ -444,7 +513,17 @@
           "Message de la CNIL : le RGPD n'empêche pas l'innovation, il lui donne un cadre."
         ],
         "impact": "Avant de confier des données de l'entreprise à une IA, il faut vérifier qu'on en a le droit et associer le DPO.",
-        "avis": "À compléter : ton avis en une ou deux phrases."
+        "avis": "À compléter : ton avis en une ou deux phrases.",
+        "iso": "2024-04-08",
+        "author": "CNIL",
+        "site": "cnil.fr",
+        "keywords": "RGPD, IA, données personnelles, conformité",
+        "type": "Juridique / réglementaire",
+        "notes": {
+          "pertinence": 3,
+          "date": 2,
+          "auteur": 4
+        }
       }
     ],
     "sources": [
@@ -483,6 +562,38 @@
     ],
     "doc": "",
     "docLabel": "Ma présentation (PDF)",
-    "table": "docs/veille-sources.xlsx"
+    "table": "docs/veille-sources.xlsx",
+    "weights": {
+      "pertinence": 3,
+      "date": 4,
+      "auteur": 3
+    },
+    "threshold": 20,
+    "steps": [
+      {
+        "title": "Collecte automatisée",
+        "text": "Trois fois par semaine (lundi, mercredi et samedi), une tâche programmée de Claude, l'IA d'Anthropic, recherche les actualités sur l'IA en entreprise dans des sources fiables : ANSSI, CERT-FR, CNIL, Commission européenne et médias spécialisés. Elle ouvre chaque article pour vérifier son contenu et sa date exacte."
+      },
+      {
+        "title": "Proposition sur GitHub",
+        "text": "Les fiches résumées (date, source, points clés, impact pour l'entreprise) arrivent sous forme de pull request sur le dépôt GitHub du portfolio. À ce stade, rien n'est publié."
+      },
+      {
+        "title": "Lecture et notation",
+        "text": "Je lis moi-même chaque article source et je le note de 1 à 4 sur trois critères : pertinence (poids 3), date et actualité (poids 4), fiabilité de l'auteur (poids 3). J'obtiens un score sur 40."
+      },
+      {
+        "title": "Filtre à 20/40",
+        "text": "Seuls les articles qui obtiennent plus de 20/40 sont publiés sur cette page. Les autres sont écartés, mais ils restent comptés dans les statistiques."
+      },
+      {
+        "title": "Mon analyse",
+        "text": "Pour chaque article retenu, j'ajoute mon avis personnel et l'impact concret pour un service informatique."
+      },
+      {
+        "title": "Publication",
+        "text": "Je valide la pull request : Vercel redéploie automatiquement le site, et le tableau d'analyse Excel est régénéré à partir des mêmes notes."
+      }
+    ]
   }
 }
