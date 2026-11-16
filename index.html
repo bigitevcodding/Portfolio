@@ -561,9 +561,12 @@ function applyContent(d) {
   if (d.admin) CONFIG.admin = d.admin;
 }
 renderSite(); renderContent();
+// Empreinte de la version publiée : sert à détecter un brouillon ou une publication basés sur une ancienne version
+const textHash = s => { let h = 5381; for (let i = 0; i < s.length; i++) h = (h * 33 + s.charCodeAt(i)) >>> 0; return h.toString(36) + ':' + s.length; };
+window.__PUBH = '';
 const contentReady = fetch('content.json?v=' + Date.now(), { cache: 'no-store' })
-  .then(r => r.ok ? r.json() : null)
-  .then(d => { if (d) { applyContent(d); renderSite(); renderContent(); } })
+  .then(r => r.ok ? r.text() : null)
+  .then(txt => { if (!txt) return; window.__PUBH = textHash(txt); applyContent(JSON.parse(txt)); renderSite(); renderContent(); })
   .catch(() => {});
 
 /* ---------- Pages ---------- */
@@ -978,7 +981,7 @@ startPortfolio();
   /* ---------- Modifications : rendu en direct + brouillon local ---------- */
   let raf = 0;
   function changed() {
-    ADMIN.dirty++; store.set(DRAFT, exportContent());
+    ADMIN.dirty++; store.set(DRAFT, { base: window.__PUBH, at: Date.now(), data: exportContent() });
     cancelAnimationFrame(raf);
     raf = requestAnimationFrame(() => {
       renderSite(); renderContent(); updateBar();
@@ -1199,6 +1202,13 @@ startPortfolio();
     if (!ADMIN.cfg) { busy = true; const ok = await githubModal(); busy = false; if (!ok) return; }
     busy = true; toast('Publication en cours…', 2500);
     try {
+      // Sécurité : on refuse de publier si la version en ligne a changé depuis l'ouverture de la page
+      const branch0 = ADMIN.cfg.branch || 'main';
+      const cur = await api(`/contents/content.json?ref=${branch0}`).catch(() => null);
+      if (cur && cur.content) {
+        const bytes = Uint8Array.from(atob(cur.content.replace(/\n/g, '')), c => c.charCodeAt(0)), online = new TextDecoder().decode(bytes);
+        if (window.__PUBH && textHash(online) !== window.__PUBH) throw new Error("le site a été mis à jour depuis l'ouverture de cette page. Rien n'a été écrasé : recharge la page (Ctrl+F5), puis refais tes modifications.");
+      }
       const data = exportContent(), json = JSON.stringify(data, null, 2);
       const files = [{ path: 'content.json', content: b64(json) }, ...Object.entries(PENDING).filter(([p]) => json.includes(p)).map(([path, content]) => ({ path, content }))];
       const branch = ADMIN.cfg.branch || 'main';
@@ -1208,7 +1218,7 @@ startPortfolio();
       const t = await api('/git/trees', { method: 'POST', body: JSON.stringify({ base_tree: commit.tree.sha, tree }) });
       const c = await api('/git/commits', { method: 'POST', body: JSON.stringify({ message: `Mise à jour du portfolio (mode admin, ${new Date().toLocaleString('fr-FR')})`, tree: t.sha, parents: [base] }) });
       await api(`/git/refs/heads/${branch}`, { method: 'PATCH', body: JSON.stringify({ sha: c.sha }) });
-      Object.keys(PENDING).forEach(k => delete PENDING[k]); ADMIN.dirty = 0; store.del(DRAFT); updateBar();
+      Object.keys(PENDING).forEach(k => delete PENDING[k]); ADMIN.dirty = 0; store.del(DRAFT); window.__PUBH = textHash(json); updateBar();
       toast('Publié. Le site sera à jour dans environ 30 secondes.', 5000);
     } catch (e) { toast('Échec de la publication : ' + e.message, 7000); }
     busy = false;
@@ -1312,10 +1322,15 @@ startPortfolio();
     });
   }
 
-  function enable() {
+  async function enable() {
+    await contentReady;                                   // on part toujours de la version publiée
     ADMIN.on = true; root.classList.add('adm-active');
     const draft = store.get(DRAFT);
-    if (draft && JSON.stringify(draft) !== JSON.stringify(exportContent()) && confirm('Un brouillon non publié a été trouvé sur cet appareil. Le reprendre ?')) { applyContent(draft); ADMIN.dirty = 1; renderSite(); }
+    if (draft) {
+      // Un brouillon n'est proposé que s'il a été fait à partir de la version actuellement en ligne
+      if (!draft.data || !draft.base || draft.base !== window.__PUBH) { store.del(DRAFT); setTimeout(() => toast('Ancien brouillon supprimé : le site a été mis à jour depuis.', 5000), 400); }
+      else if (JSON.stringify(draft.data) !== JSON.stringify(exportContent()) && confirm('Un brouillon non publié a été trouvé sur cet appareil. Le reprendre ?')) { applyContent(draft.data); ADMIN.dirty = 1; renderSite(); }
+    }
     document.body.append(bar, drawer); updateBar(); renderContent();
   }
   function quit() {
