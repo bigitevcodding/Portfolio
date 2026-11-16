@@ -155,6 +155,19 @@
   .v-score { font:500 12px 'JetBrains Mono', monospace; border-radius:999px; padding:4px 10px; white-space:nowrap }
   .v-ok { background:#e3efe2; color:#2f6b34 } .v-mid { background:#f6e9d2; color:#8a5a12 } .v-no { background:#f4dfdb; color:#9b3a2b }
   .v-off { opacity:.55 }
+  .sec-body { min-width:0 } .v-tsec { grid-template-columns:1fr !important; gap:16px } .v-tsec .sec-body { max-width:none }
+  .v-tintro { font-size:15px; color:var(--muted); margin-bottom:16px }
+  .v-tbl-wrap { overflow-x:auto; border:1px solid var(--line); border-radius:16px; background:var(--bg2) }
+  .v-tbl { width:100%; min-width:980px; border-collapse:collapse; font-size:13px; line-height:1.4 }
+  .v-tbl th { background:#2b1e15; color:#f3eadb; font-weight:500; text-align:left; padding:10px 8px; font-size:12px; white-space:nowrap }
+  .v-tbl th small { display:block; font:400 10.5px 'JetBrains Mono', monospace; opacity:.7 }
+  .v-tbl td { padding:9px 8px; border-top:1px solid var(--line); vertical-align:middle }
+  .v-tbl tbody tr:hover { background:color-mix(in srgb, var(--accent) 7%, transparent) }
+  .v-tbl .c { text-align:center } .v-tbl .nw { white-space:nowrap } .v-tbl .v-t { min-width:200px; font-weight:500 } .v-tbl .v-site { min-width:96px; max-width:130px; overflow-wrap:anywhere }
+  .v-tbl .v-t a { text-decoration:underline; text-underline-offset:3px; text-decoration-color:color-mix(in srgb, var(--fg) 30%, transparent) }
+  .v-tbl .v-kw { color:var(--muted); min-width:140px }
+  .v-sbar { position:relative; display:inline-flex; width:64px; height:22px; border-radius:6px; background:var(--line); overflow:hidden; align-items:center; justify-content:center }
+  .v-sbar i { position:absolute; left:0; top:0; bottom:0; background:color-mix(in srgb, var(--accent) 55%, transparent) } .v-sbar b { position:relative; font:500 12px 'JetBrains Mono', monospace }
   .v-srcs { display:flex; flex-direction:column; gap:10px; font-size:16px }
   html.adm-active #page.veille .sec { cursor:pointer }
   .tiles { display:grid; gap:16px; grid-template-columns:repeat(auto-fit, minmax(210px, 1fr)) }
@@ -663,8 +676,24 @@ function veilleHTML() {
         ${a.avis ? `<p class="v-note"><b>Mon avis</b>${linkify(esc(a.avis))}</p>` : ''}
         <div class="v-foot">${a.url ? `<a class="v-src" href="${a.url}" target="_blank" rel="noopener">Source : ${esc(a.source || "lire l'article")} ↗</a>` : '<span></span>'}<span class="v-score v-${r[1]}">${a._s === null ? r[0] : `${a._s}/${max}`}</span></div>
       </article>`; }).join('') || '<div class="ph">Aucun article publié pour l\'instant…</div>'}</div></div></section>
+    <section class="sec v-tsec"><h3 class="mono muted">Tableau d'analyse des sources</h3><div class="sec-body">
+      <p class="v-tintro">Chaque source est notée de 1 à 4 sur trois critères pondérés. Seules celles à plus de ${seuil}/${max} sont publiées.</p>
+      <div class="v-tbl-wrap"><table class="v-tbl">
+        <thead><tr><th>N°</th><th>Titre</th><th>Auteur</th><th>Site</th><th>Date</th><th>Mots-clés</th><th>Type</th>${V_CRIT.map(([k, l]) => `<th class="c" title="${l}">${l.split(' ')[0]}<small>×${(V.weights || {})[k] ?? '—'}</small></th>`).join('')}<th class="c">Score</th><th>Recommandation</th></tr></thead>
+        <tbody>${all.filter(a => a._s !== null).sort((x, y) => (y.iso || '').localeCompare(x.iso || '')).map((a, i) => { const r = reco(a._s); return `<tr>
+          <td class="c">${i + 1}</td>
+          <td class="v-t">${a.url ? `<a href="${a.url}" target="_blank" rel="noopener">${esc(a.title || '')}</a>` : esc(a.title || '')}</td>
+          <td>${esc(a.author || a.source || '')}</td><td class="v-site">${esc(a.site || '')}</td>
+          <td class="nw">${a.iso ? a.iso.split('-').reverse().join('/') : esc(a.date || '')}</td>
+          <td class="v-kw">${esc(a.keywords || '')}</td><td>${esc(a.type || a.cat || '')}</td>
+          ${V_CRIT.map(([k]) => `<td class="c">${(a.notes || {})[k]}</td>`).join('')}
+          <td class="c"><span class="v-sbar"><i style="width:${a._s / max * 100}%"></i><b>${a._s}</b></span></td>
+          <td><span class="v-score v-${r[1]}">${r[0]}</span></td></tr>`; }).join('')}</tbody>
+      </table></div>
+      <p class="mono muted v-upd">Faire défiler le tableau horizontalement sur téléphone · même contenu que le fichier Excel</p>
+    </div></section>
     <section class="sec"><h3 class="mono muted">Mes sources</h3><div class="sec-body"><ul class="v-srcs">${S.map(s => `<li><a class="ulink" href="${s.url}" target="_blank" rel="noopener">${esc(s.label || s.url)}</a></li>`).join('')}</ul>
-      ${V.table ? `<div class="mt-8"><a class="btn" href="${src(V.table)}" download>Télécharger le tableau d'analyse des sources (Excel) ↓</a></div>` : ''}</div></section>
+      ${V.table ? `<div class="mt-8"><a class="btn" href="${src(V.table)}" download>Télécharger le tableau au format Excel ↓</a></div>` : ''}</div></section>
     ${V.doc || adm ? `<section class="sec"><h3 class="mono muted">Présentation</h3><div class="sec-body">${docHTML(V)}</div></section>` : ''}
   </div>`;
 }
