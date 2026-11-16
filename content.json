@@ -98,16 +98,33 @@
           ]
         },
         {
-          "title": "Équiper un nouvel espace de stockage en réseau et en Wi-Fi",
-          "text": "Création et administration du réseau d'un nouvel espace de stockage : deux switchs, un par tente, et 14 bornes Wi-Fi pour connecter les scanettes des opérateurs.",
+          "title": "Équiper un espace de stockage en Wi-Fi",
+          "text": "Mise en réseau complète d'un nouvel espace de stockage de deux tentes : switchs configurés de A à Z avec un lien de redondance, 14 bornes Wi-Fi et des caméras de surveillance, chacun dans son VLAN.",
           "blocks": [
             {
               "label": "Contexte",
-              "text": "OPmobility a ouvert un nouvel espace de stockage composé de deux tentes voisines. Les opérateurs y utilisent des scanettes qui lisent les codes-barres des pièces : elles ont besoin d’une couverture Wi-Fi fiable dans toute la zone."
+              "text": "OPmobility a ouvert un nouvel espace de stockage composé de deux tentes, éloignées l'une de l'autre. Les opérateurs y utilisent des scanettes qui lisent les codes-barres des pièces : il leur faut un Wi-Fi fiable sur toute la surface. L'espace devait aussi être placé sous vidéosurveillance."
             },
             {
               "label": "Objectif",
-              "text": "Raccorder les deux tentes au réseau du site et assurer une couverture Wi-Fi complète pour les scanettes."
+              "text": "Raccorder les deux tentes au réseau du site sans qu'elles puissent être coupées du cœur, couvrir toute la surface en Wi-Fi sans zone blanche, et mettre en service les caméras de surveillance."
+            },
+            {
+              "label": "Architecture et redondance",
+              "text": "J'ai configuré les deux switchs de A à Z : S15 pour la tente 1 et S16 pour la tente 2. Chacun est relié au switch S10, situé dans le labo le plus proche des tentes, lui-même raccordé au switch cœur du datacenter.\n\nComme les deux tentes sont éloignées, j'ai ajouté un lien de redondance entre S15 et S16 : si la liaison d'une tente vers S10 est coupée, son trafic passe par l'autre switch et la tente reste reliée au cœur du réseau."
+            },
+            {
+              "label": "Topologie",
+              "image": "img/topologie-stockage-wifi-v2.webp",
+              "caption": "Topologie simplifiée : CORE → S10 → S15 / S16, lien de redondance entre les deux tentes."
+            },
+            {
+              "label": "Segmentation par VLAN",
+              "text": "Chaque type d'équipement a sa propre configuration de port et son propre VLAN :\n\n- VLAN 105 pour les bornes Wi-Fi ;\n- VLAN 99 pour les caméras de surveillance.\n\nLes caméras sont ainsi isolées du reste du réseau : une caméra compromise ne donne pas accès aux autres équipements. Les scanettes, elles, se connectent en Wi-Fi via les bornes."
+            },
+            {
+              "label": "Calcul de l'installation",
+              "text": "Avant la pose, il a fallu dimensionner l'installation : emplacement de la baie dans chaque tente, nombre de ports nécessaires, et position de chaque borne selon sa zone de couverture.\n\nLa hauteur de pose a été calculée pour éviter les zones blanches : trop haut, le signal se perd avant d'atteindre le sol ; trop bas, il est bloqué par les racks et les marchandises. Résultat : 10 bornes dans la tente 1 et 4 dans la tente 2, plus petite."
             },
             {
               "label": "Implantation",
@@ -115,21 +132,24 @@
               "caption": "Implantation des deux tentes et des bornes"
             },
             {
-              "label": "Réalisation",
-              "text": "J’ai créé et administré deux switchs, un par tente, pour raccorder l’espace au réseau du site. J’ai déployé 14 bornes Wi-Fi : 10 dans la première tente et 4 dans la seconde, plus petite. Les bornes sont placées dans le VLAN 91 et les scanettes dans le VLAN 555 : séparer ces flux isole les terminaux des opérateurs du reste du réseau et permet de mieux contrôler leurs accès."
-            },
-            {
-              "label": "Topologie",
-              "image": "img/uploads/mw0glgx9-topologie-stockage-wifi.webp",
-              "caption": "Topologie réseau (VLAN réels, adresses IP fictives"
+              "label": "Coordination des équipes",
+              "text": "Pour amener le réseau jusqu'aux tentes, j'ai été l'interlocuteur technique des équipes d'électricité et de câblage. J'ai défini avec elles le passage des câbles, l'emplacement des baies, des bornes et des caméras, et je leur ai transmis nos recommandations, puis j'ai vérifié que l'installation correspondait à ce qui était prévu."
             },
             {
               "label": "Résultat",
-              "text": "Les deux tentes sont couvertes en Wi-Fi et les scanettes fonctionnent dans tout l’espace de stockage."
+              "text": "Les deux tentes sont couvertes en Wi-Fi sans zone blanche, les scanettes fonctionnent dans tout l'espace, les caméras sont en service, et chaque tente reste reliée au cœur du réseau même si une liaison est coupée."
             },
             {
               "label": "Compétences",
-              "text": "Administration de switchs, Déploiement Wi-Fi, Segmentation VLAN, Mise en service d'un réseau"
+              "list": [
+                "Configuration complète de switchs",
+                "Redondance de liens",
+                "Segmentation VLAN",
+                "Déploiement Wi-Fi",
+                "Vidéosurveillance IP",
+                "Dimensionnement d'une installation",
+                "Coordination d'équipes"
+              ]
             }
           ],
           "meta": [
@@ -139,19 +159,24 @@
             ],
             [
               "Équipements",
-              "2 switchs, 14 bornes Wi-Fi"
+              "2 switchs, 14 bornes Wi-Fi, caméras"
             ],
             [
               "Segmentation",
-              "VLAN 91 (bornes) · VLAN 555 (scanettes"
+              "VLAN 105 (bornes) · VLAN 99 (caméras)"
+            ],
+            [
+              "Raccordement",
+              "Switch S10, au plus près des tentes"
             ]
           ],
           "tags": [
             "Switching",
-            "Wi-fi",
+            "Wi-Fi",
             "VLAN",
-            "Logistique",
-            "management"
+            "Redondance",
+            "Vidéosurveillance",
+            "Gestion de chantier"
           ],
           "image": "img/uploads/mw0giigt-implantation-tentes.webp",
           "year": "2026"
