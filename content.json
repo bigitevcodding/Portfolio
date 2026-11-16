@@ -294,8 +294,89 @@
       "sub": "Homelab & expérimentations",
       "items": [
         {
-          "title": "Title",
-          "text": "Écris ce que tu veux ici."
+          "title": "Mon portfolio : conception, hébergement et sécurité",
+          "text": "Un site conçu et administré de A à Z : code versionné sur GitHub, déploiement automatique sur Vercel, domaine sur Cloudflare, administration sécurisée et veille automatisée.",
+          "image": "img/portfolio-github.webp",
+          "year": "2026",
+          "tags": [
+            "GitHub",
+            "Vercel",
+            "DNS Cloudflare",
+            "HTTPS",
+            "Chiffrement",
+            "Automatisation"
+          ],
+          "meta": [
+            [
+              "Hébergement",
+              "Vercel (offre Hobby) + GitHub"
+            ],
+            [
+              "Domaine",
+              "portfolio.sarl (Cloudflare)"
+            ],
+            [
+              "Technologies",
+              "HTML, CSS, JavaScript, API GitHub"
+            ],
+            [
+              "Depuis",
+              "Octobre 2026"
+            ]
+          ],
+          "blocks": [
+            {
+              "label": "Pourquoi ce projet",
+              "text": "Le BTS SIO demande un portfolio pour l'épreuve E5. Plutôt qu'un modèle tout fait, j'ai voulu un site dont je maîtrise toute la chaîne : le code, l'hébergement, le nom de domaine et la sécurité de l'administration. Le portfolio est donc lui-même un projet d'infrastructure."
+            },
+            {
+              "label": "Architecture",
+              "text": "Le site est séparé en deux : index.html contient la présentation (design, pages, mode admin) et content.json contient tout le contenu (projets, certifications, veille). Les images et documents sont rangés dans des dossiers à part.\n\nGitHub est la source de vérité : chaque modification est un commit, donc tout est tracé et réversible. À chaque changement sur la branche principale, Vercel republie automatiquement le site en une trentaine de secondes.\n\nLe domaine portfolio.sarl est géré chez Cloudflare en mode DNS seul : un enregistrement A et un CNAME pointent vers Vercel, qui fournit le certificat HTTPS."
+            },
+            {
+              "label": "Le dépôt GitHub",
+              "image": "img/portfolio-github.webp",
+              "caption": "Dépôt bigitevcodding/Portfolio : historique des commits, déploiements validés (coche verte)."
+            },
+            {
+              "label": "Hébergement et consommation",
+              "text": "Le site tourne sur l'offre gratuite Hobby de Vercel. Sur les 30 derniers jours :\n\n- 5,6 K requêtes CDN sur 1 M autorisées ;\n- 76,7 Mo transférés sur 100 Go ;\n- 4,52 Mo de stockage de déploiement sur 10 Go ;\n- 2 secondes de calcul sur 1 heure.\n\nJe reste très loin des limites, car le site est léger : le CSS est précompilé (8 Ko au lieu d'environ 400 Ko chargés à chaque visite), et les images sont compressées automatiquement en WebP lors de leur ajout."
+            },
+            {
+              "label": "Tableau de bord Vercel",
+              "image": "img/portfolio-vercel.webp",
+              "caption": "Consommation sur 30 jours (offre Hobby) et dernier déploiement du projet."
+            },
+            {
+              "label": "Règles de sécurité",
+              "text": "- **Code d'administration jamais stocké en clair** : le site ne contient que son empreinte, calculée avec PBKDF2-SHA-256, 600 000 itérations et un sel. Même en lisant le code source, on ne retrouve pas le code.\n- **Jeton GitHub à privilèges minimaux** : un jeton « fine-grained » limité à ce seul dépôt, avec la seule permission sur le contenu. Il est chiffré en AES-GCM avec une clé dérivée du code et ne quitte pas mon appareil.\n- **Aucun serveur ni base de données à maintenir** : le site est statique, ce qui réduit fortement la surface d'attaque.\n- **HTTPS partout**, avec le certificat fourni par Vercel.\n- **Traçabilité** : chaque publication est un commit daté, avec retour arrière possible.\n- **Confidentialité de l'entreprise** : schémas simplifiés, adresses IP et ports fictifs, rien de sensible sur OPmobility."
+            },
+            {
+              "label": "Automatisation de la veille",
+              "text": "Ma veille technologique est alimentée trois fois par semaine par une tâche programmée de Claude, qui propose des fiches sous forme de pull requests sur GitHub. Rien n'est publié sans ma validation : je lis chaque article, je le note, et seuls ceux à plus de 20/40 apparaissent. Un script régénère ensuite le tableau Excel des sources à partir des mêmes données."
+            },
+            {
+              "label": "Difficultés rencontrées",
+              "text": "- **Écran noir sur certains PC** avec l'intro 3D : l'effet de post-traitement n'était pas supporté partout. J'ai finalement retiré la 3D pour un site plus rapide et plus sobre.\n- **Site lent au chargement** : Tailwind était compilé dans le navigateur à chaque visite. Je l'ai précompilé.\n- **Nouvelles sections écrasées** par le contenu déjà publié : j'ai ajouté une fusion qui conserve les sections ajoutées au site.\n- **Risque d'écraser la version en ligne** avec un ancien brouillon local : je vérifie toujours l'historique GitHub avant de publier."
+            },
+            {
+              "label": "Améliorations prévues",
+              "text": "- Ajouter des en-têtes de sécurité HTTP (CSP, HSTS, X-Frame-Options) et viser la note A sur securityheaders.com.\n- Héberger le site sur mon homelab Proxmox, derrière un tunnel, pour maîtriser aussi le serveur.\n- Mettre en place une alerte en cas de pic de consommation ou d'échec de déploiement."
+            },
+            {
+              "label": "Compétences mobilisées",
+              "list": [
+                "Gestion de versions (Git, GitHub)",
+                "Déploiement continu (Vercel)",
+                "DNS et nom de domaine",
+                "HTTPS et certificats",
+                "Hachage et chiffrement",
+                "Principe du moindre privilège",
+                "API REST",
+                "Automatisation"
+              ]
+            }
+          ]
         },
         {
           "title": "Title",
