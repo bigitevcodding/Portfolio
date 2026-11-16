@@ -9,13 +9,22 @@
 <meta property="og:description" content="BTS SIO SISR — Alternant chez OPmobility. Infrastructure, réseaux, cybersécurité." />
 <meta name="theme-color" content="#f5f3ef" />
 
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+<!-- Polices hébergées sur le site (aucun appel à Google Fonts : pas d'adresse IP transmise à un tiers) -->
+<style>
+  @font-face { font-family:'Inter Tight'; font-style:normal; font-weight:300; font-display:swap; src:url(fonts/inter-tight-latin-300-normal.woff2) format('woff2') }
+  @font-face { font-family:'Inter Tight'; font-style:normal; font-weight:400; font-display:swap; src:url(fonts/inter-tight-latin-400-normal.woff2) format('woff2') }
+  @font-face { font-family:'Inter Tight'; font-style:normal; font-weight:500; font-display:swap; src:url(fonts/inter-tight-latin-500-normal.woff2) format('woff2') }
+  @font-face { font-family:'Inter Tight'; font-style:normal; font-weight:600; font-display:swap; src:url(fonts/inter-tight-latin-600-normal.woff2) format('woff2') }
+  @font-face { font-family:'Instrument Serif'; font-style:normal; font-weight:400; font-display:swap; src:url(fonts/instrument-serif-latin-400-normal.woff2) format('woff2') }
+  @font-face { font-family:'Instrument Serif'; font-style:italic; font-weight:400; font-display:swap; src:url(fonts/instrument-serif-latin-400-italic.woff2) format('woff2') }
+  @font-face { font-family:'JetBrains Mono'; font-style:normal; font-weight:400; font-display:swap; src:url(fonts/jetbrains-mono-latin-400-normal.woff2) format('woff2') }
+</style>
+<link rel="preload" href="fonts/inter-tight-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<!-- Bibliothèques hébergées sur le site : GSAP 3.12.5, ScrollTrigger, Lenis 1.1.13 -->
+<script src="js/gsap.min.js"></script>
+<script src="js/ScrollTrigger.min.js"></script>
+<script src="js/lenis.min.js"></script>
 
 <style>
   /* =====================================================================
@@ -303,7 +312,7 @@
     <p class="mono muted mb-6">Contact</p>
     <a id="mail-big" href="#" class="mailbig" data-cursor="Écrire"></a>
     <div id="contact-links" class="flex flex-wrap gap-3 mt-12"></div>
-    <div class="mt-24 pt-6 flex justify-between flex-wrap gap-3 mono muted" style="border-top:1px solid var(--line)"><span id="foot-l"></span><span class="flex items-center gap-5"><span id="foot-r"></span><button id="admin-btn" class="admin-link" type="button" style="margin-left:18px">Admin</button></span></div>
+    <div class="mt-24 pt-6 flex justify-between flex-wrap gap-3 mono muted" style="border-top:1px solid var(--line)"><span id="foot-l"></span><span class="flex items-center gap-5"><span id="foot-r"></span><a href="#/mentions-legales" class="admin-link" style="margin-left:18px">Mentions légales</a><button id="admin-btn" class="admin-link" type="button" style="margin-left:18px">Admin</button></span></div>
   </section>
 </main>
 
@@ -698,7 +707,24 @@ function veilleHTML() {
     ${V.doc || adm ? `<section class="sec"><h3 class="mono muted">Présentation</h3><div class="sec-body">${docHTML(V)}</div></section>` : ''}
   </div>`;
 }
-const pageHTML = t => t === 'info' ? infoHTML() : t === 'certs' ? certsHTML() : t === 'veille' ? veilleHTML() : projectHTML(findItem(t));
+function legalHTML() {
+  const mail = (CONFIG.site && CONFIG.site.email) || '', name = `${CONFIG.site.firstName || ''} ${CONFIG.site.lastName || ''}`.trim();
+  const sec = (h, body) => `<section class="sec in"><h3 class="mono muted">${h}</h3><div class="sec-body">${body}</div></section>`;
+  const m = mail ? `<a class="ulink" href="mailto:${mail}">${mail}</a>` : '—';
+  return `<div class="wrap">
+    <a href="#/" class="back pg-anim">← Retour</a>
+    <p class="mono muted mt-12 pg-anim">Informations légales</p>
+    <h1 class="pg-title"><span class="mask"><span class="mask-in">Mentions légales</span></span></h1>
+    <p class="pg-lead pg-anim">Conformément à la loi n° 2004-575 du 21 juin 2004 pour la confiance dans l'économie numérique (LCEN).</p>
+    ${sec('Éditeur du site', `<p>Ce site est le portfolio personnel de <b>${name}</b>, étudiant en BTS SIO option SISR. Il est édité à titre personnel et non professionnel.</p><p>Directeur de la publication : ${name}<br>Contact : ${m}</p>`)}
+    ${sec('Hébergement', `<p><b>Vercel Inc.</b><br>440 N Barranca Ave #4133, Covina, CA 91723, États-Unis<br><a class="ulink" href="https://vercel.com" target="_blank" rel="noopener">vercel.com</a></p><p>Code source versionné sur GitHub (GitHub, Inc.). Nom de domaine géré via Cloudflare, Inc.</p>`)}
+    ${sec('Propriété intellectuelle', `<p>Les textes, schémas et visuels de ce site sont la propriété de ${name}, sauf mention contraire. Toute reproduction sans autorisation est interdite.</p><p>Les marques et logiciels cités (Cisco, Microsoft, Vercel, GitHub…) appartiennent à leurs propriétaires respectifs. Les fiches de veille sont des résumés rédigés pour ce site, avec un lien vers chaque source originale.</p><p>Les schémas réseau des projets en entreprise sont simplifiés : noms, adresses IP et ports sont fictifs ou indicatifs, afin de ne divulguer aucune information sensible.</p>`)}
+    ${sec('Données personnelles et cookies', `<p>Ce site ne contient <b>aucun formulaire, aucun compte visiteur, aucune mesure d'audience et aucun cookie</b>. Les polices et les scripts sont hébergés sur le site lui-même : la consultation ne déclenche aucun appel à un service tiers.</p><p>Seule la préférence de thème (clair ou foncé) est enregistrée dans votre navigateur (stockage local), à votre demande. Elle n'est jamais transmise et peut être effacée à tout moment dans les réglages du navigateur.</p><p>Comme tout hébergeur, Vercel traite des données techniques de connexion (dont l'adresse IP) pour acheminer et sécuriser le site. Si une vidéo YouTube est intégrée, elle utilise le mode « confidentialité renforcée » (youtube-nocookie.com).</p><p>Conformément au RGPD, vous pouvez exercer vos droits d'accès, de rectification et d'effacement en écrivant à ${m}. Vous pouvez aussi adresser une réclamation à la <a class="ulink" href="https://www.cnil.fr" target="_blank" rel="noopener">CNIL</a>.</p>`)}
+    ${sec('Liens externes', `<p>Ce site contient des liens vers d'autres sites (sources de veille, organismes). Leur contenu n'engage pas l'éditeur du portfolio.</p>`)}
+    <p class="mono muted" style="font-size:11px;padding:30px 0 10px">Dernière mise à jour : 16 novembre 2026</p>
+  </div>`;
+}
+const pageHTML = t => t === 'info' ? infoHTML() : t === 'certs' ? certsHTML() : t === 'veille' ? veilleHTML() : t === 'legal' ? legalHTML() : projectHTML(findItem(t));
 function infoHTML() {
   const I = CONFIG.info;
   return `<div class="wrap">
@@ -756,7 +782,7 @@ function go(t, instant) {
   current = t;
   if (instant) { render(t); if (t !== 'home') animatePage(); return; }
   busy = true; window.__navT = performance.now();
-  label.textContent = t === 'home' ? 'Accueil' : t === 'info' ? 'Info' : t === 'certs' ? 'Certifications' : t === 'veille' ? 'Veille' : findItem(t).title;
+  label.textContent = t === 'home' ? 'Accueil' : t === 'info' ? 'Info' : t === 'certs' ? 'Certifications' : t === 'veille' ? 'Veille' : t === 'legal' ? 'Mentions légales' : findItem(t).title;
   curtain.classList.toggle('beige', t === 'veille');
   gsap.timeline({ onComplete: () => { busy = false; if (pending) { const p = pending; pending = null; go(p); } } })
     // Double rideau : orange d'abord, puis sombre par-dessus
@@ -784,13 +810,14 @@ function route(instant) {
   if (h === '#/info') return go('info', instant);
   if (h === '#/certs') return go('certs', instant);
   if (h === '#/veille') return go('veille', instant);
+  if (h === '#/mentions-legales') return go('legal', instant);
   go('home', instant);
 }
 addEventListener('hashchange', () => route());
 // Clic sur Info / Certifications / Retour : on navigue directement (même si l'adresse est déjà la bonne)
 document.addEventListener('click', e => {
   const a = e.target.closest('a[href^="#/"]'); if (!a || e.defaultPrevented || e.metaKey || e.ctrlKey) return;
-  const h = a.getAttribute('href'); if (!/^#\/(info|certs|veille|p\/.+)?$/.test(h)) return;
+  const h = a.getAttribute('href'); if (!/^#\/(info|certs|veille|mentions-legales|p\/.+)?$/.test(h)) return;
   e.preventDefault();
   if (location.hash !== h) history.pushState(null, '', h);
   route();
