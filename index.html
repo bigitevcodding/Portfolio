@@ -459,7 +459,8 @@ const root = document.documentElement;
 const esc = s => String(s).replace(/[&<>]/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[m]));
 // Liens dans les textes : écris [texte du lien](https://adresse)
 const linkify = t => String(t).replace(/\[([^\]]+)\]\(((?:https?:\/\/|mailto:|\/|#|img\/)[^)\s]+)\)/g, '<a class="ulink" href="$2" target="_blank" rel="noopener">$1</a>');
-const para = t => String(t).split('\n\n').map(p => `<p>${linkify(p).replace(/\n/g, '<br>')}</p>`).join('');
+// Texte : ligne vide = paragraphe, **gras**, [lien](https://…)
+const para = t => String(t).split('\n\n').map(p => `<p>${linkify(p).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/\n/g, '<br>')}</p>`).join('');
 const chips = a => (a || []).map(t => `<span class="chip">${t}</span>`).join('');
 const IMG = {};                          // images ajoutées en mode admin, pas encore publiées (aperçu)
 const src = p => IMG[p] || p;
