@@ -1,0 +1,41 @@
+/* Mode administration (chargé uniquement à l'ouverture du mode admin) */
+html.adm-active, html.adm-active * { cursor:auto !important }
+html.adm-active .card { outline:1px dashed color-mix(in srgb, var(--accent) 55%, transparent); outline-offset:10px; border-radius:18px }
+html.adm-active .card::after { content:"Modifier"; position:absolute; top:12px; right:12px; z-index:2; font:500 11px 'JetBrains Mono', monospace; letter-spacing:.06em; text-transform:uppercase; color:#fff; background:var(--accent); padding:4px 10px; border-radius:999px; opacity:0; transition:opacity .3s }
+html.adm-active #page .sec, html.adm-active #page .pg-title { cursor:pointer } html.adm-active #page .sec:hover { outline:1px dashed color-mix(in srgb, var(--accent) 55%, transparent); outline-offset:8px; border-radius:12px }
+html.adm-active .card { position:relative } html.adm-active .card:hover::after { opacity:1 }
+.card-add { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; min-height:260px; border:1.5px dashed color-mix(in srgb, var(--accent) 60%, transparent); border-radius:18px; color:var(--accent); font-size:15px; transition:background .3s }
+.card-add span { font-size:34px; line-height:1 } .card-add:hover { background:color-mix(in srgb, var(--accent) 8%, transparent) }
+.ulink { color:var(--accent); text-decoration:underline; text-underline-offset:3px }
+
+.adm { font-family:'Inter Tight', system-ui, sans-serif; color:var(--fg) }
+html.adm-drawer-open .adm-bar { left:calc((100vw - min(480px, 100vw)) / 2) }   /* la barre se décale quand le panneau est ouvert */
+.adm-bar { position:fixed; left:50%; bottom:20px; transform:translateX(-50%); z-index:255; transition:left .6s var(--ease); display:flex; align-items:center; gap:6px; padding:6px 6px 6px 16px; background:var(--fg); color:var(--bg); border-radius:999px; box-shadow:0 12px 40px rgba(0,0,0,.25); font-size:13px; white-space:nowrap; max-width:calc(100vw - 24px); overflow-x:auto }
+.adm-bar .st { display:flex; align-items:center; gap:8px; margin-right:6px } .adm-bar .st i { width:7px; height:7px; border-radius:50%; background:var(--accent) }
+.adm-bar button { padding:8px 14px; border-radius:999px; color:inherit; transition:background .25s } .adm-bar button:hover { background:rgba(127,127,127,.25) }
+.adm-bar button.pub { background:var(--accent); color:var(--bg) } .adm-bar button.pub:hover { background:var(--accent); filter:brightness(1.1) }
+.adm-drawer { position:fixed; top:0; right:0; bottom:0; width:min(480px, 100vw); z-index:250; background:var(--bg2); border-left:1px solid var(--line); box-shadow:-20px 0 60px rgba(0,0,0,.12); overflow-y:auto; padding:22px 24px 120px; transform:translateX(105%); transition:transform .6s var(--ease) }
+.adm-drawer.open { transform:none }
+.adm-drawer h2 { font-size:26px; font-weight:500; letter-spacing:-.03em; margin:6px 0 20px }
+.adm-head { display:flex; justify-content:space-between; align-items:center }
+.adm-x { width:34px; height:34px; border-radius:50%; border:1px solid var(--line) } .adm-x:hover { border-color:var(--fg) }
+.adm-f { margin-bottom:14px } .adm-f > label { display:block; font:400 10.5px 'JetBrains Mono', monospace; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); margin-bottom:6px }
+.adm-f .hint { font-size:12px; color:var(--muted); margin-top:5px }
+.adm input[type=text], .adm input[type=password], .adm input[type=url], .adm textarea, .adm select { width:100%; background:var(--bg); border:1px solid var(--line); border-radius:10px; padding:10px 12px; font:inherit; font-size:14px; color:var(--fg); outline:none; transition:border-color .2s }
+.adm textarea { min-height:90px; resize:vertical; line-height:1.5 }
+.adm input:focus, .adm textarea:focus, .adm select:focus { border-color:var(--accent) }
+.adm-row { display:flex; gap:8px; align-items:center } .adm-row > * { flex:1 }
+.adm-sec { border-top:1px solid var(--line); margin-top:22px; padding-top:18px }
+.adm-sec > h3 { font:400 11px 'JetBrains Mono', monospace; letter-spacing:.06em; text-transform:uppercase; color:var(--accent); margin-bottom:12px }
+.adm-btn { display:inline-flex; align-items:center; gap:6px; padding:9px 14px; border:1px solid var(--line); border-radius:999px; font-size:13px; transition:border-color .2s, background .2s }
+.adm-btn:hover { border-color:var(--fg) } .adm-btn.acc { background:var(--accent); border-color:var(--accent); color:var(--bg) } .adm-btn.danger { color:#c0392b } .adm-btn.danger:hover { border-color:#c0392b }
+.adm-ico { flex:0 0 34px !important; width:34px; height:34px; border:1px solid var(--line); border-radius:9px; font-size:13px } .adm-ico:hover { border-color:var(--fg) }
+.adm-block { border:1px solid var(--line); border-radius:14px; padding:12px; margin-bottom:10px; background:var(--bg) }
+.adm-block .adm-row:first-child { margin-bottom:10px }
+.adm-img { display:flex; gap:12px; align-items:center }
+.adm-img .pv { flex:0 0 96px; height:72px; border-radius:10px; background:var(--ph) center/cover no-repeat; border:1px solid var(--line) }
+.adm-img input[type=file] { display:none }
+.adm-modal { position:fixed; inset:0; z-index:260; display:flex; align-items:center; justify-content:center; padding:16px; background:rgba(10,10,12,.55); backdrop-filter:blur(6px) }
+.adm-card { width:min(460px, 100%); background:var(--bg2); border:1px solid var(--line); border-radius:22px; padding:26px }
+.adm-err { color:#c0392b; font-size:13px; min-height:18px; margin-top:6px }
+.adm-toast { position:fixed; left:50%; top:22px; transform:translateX(-50%); z-index:270; background:var(--fg); color:var(--bg); padding:11px 18px; border-radius:999px; font-size:13px; box-shadow:0 10px 30px rgba(0,0,0,.2) }

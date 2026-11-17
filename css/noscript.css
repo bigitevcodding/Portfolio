@@ -1,0 +1,2 @@
+/* Chargé uniquement quand JavaScript est désactivé */
+#loader, #curtain, #curtain-o, #progress, #topbar nav, #home, #page { display:none !important }
