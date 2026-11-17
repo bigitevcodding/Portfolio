@@ -1,0 +1,14 @@
+{
+  "name": "Portfolio de Tévin Bouvet",
+  "short_name": "Tévin Bouvet",
+  "description": "Infrastructure, réseaux et cybersécurité — BTS SIO SISR, alternant chez OPmobility.",
+  "lang": "fr",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#261b14",
+  "theme_color": "#261b14",
+  "icons": [
+    { "src": "favicon.svg", "type": "image/svg+xml", "sizes": "any" },
+    { "src": "apple-touch-icon.png", "type": "image/png", "sizes": "180x180" }
+  ]
+}
