@@ -447,6 +447,106 @@
     "intro": "Je suis l'arrivée de l'IA générative et des agents IA dans les entreprises : ce qu'ils apportent, les risques qu'ils créent pour la sécurité et les données, et le cadre légal qui les encadre.",
     "articles": [
       {
+        "date": "19 novembre 2026",
+        "iso": "2026-11-19",
+        "cat": "Cybersécurité",
+        "type": "Cybersécurité",
+        "title": "La Commission européenne touchée par une cyberattaque menée avec un outil d'IA offensif",
+        "source": "LeMagIT",
+        "author": "Valéry Rieß-Marchive",
+        "site": "lemagit.fr",
+        "url": "https://www.lemagit.fr/actualites/366654993/La-Commission-Europeenne-frappee-par-une-lourde-cyberattaque",
+        "keywords": "cyberattaque, agents IA offensifs, Artex, CERT-EU, Commission européenne",
+        "points": [
+          "Une cyberattaque empêche le personnel de la Commission européenne de saisir salaires et absences ; elle est jugée « essentiellement contenue », mais les dégâts restent à évaluer.",
+          "L'attaque implique Artex, un outil de test d'intrusion piloté par des agents IA, sur lequel le CERT-EU et le FBI avaient déjà alerté début novembre.",
+          "La campagne liée aurait visé plus de 200 organisations depuis mi-octobre, et Microsoft l'attribue en partie à un groupe lié à la Chine."
+        ],
+        "impact": "Les attaques automatisées par IA vont plus vite : il faut surveiller en continu, détecter tôt et appliquer les alertes des CERT sans attendre.",
+        "avis": "À compléter : ton avis en une ou deux phrases.",
+        "notes": {}
+      },
+      {
+        "date": "19 novembre 2026",
+        "iso": "2026-11-19",
+        "cat": "Cloud · IA",
+        "type": "Cloud",
+        "title": "OVHcloud lance son propre modèle d'IA et se présente comme fournisseur souverain pour les entreprises",
+        "source": "IT SOCIAL",
+        "author": "Mourad Krim",
+        "site": "itsocial.fr",
+        "url": "https://itsocial.fr/contenus/actualites/intelligence-artificielle-actualites-contenus/avec-olala-son-modele-frugal-et-une-pile-integree-ovhcloud-se-pose-en-fournisseur-souverain-de-lia-dentreprise/",
+        "keywords": "OVHcloud, IA souveraine, Olala, cloud européen, SecNumCloud",
+        "points": [
+          "Lors de son AI Summit, OVHcloud a présenté Olala, un modèle d'IA léger qui peut tourner sur un simple GPU de 8 Go.",
+          "Les services IA (agents, espace de travail) peuvent être déployés en cloud public, en cloud privé ou sur site, y compris sous qualification SecNumCloud.",
+          "Le journaliste reste prudent : aucun score d'évaluation publié et beaucoup de nouveautés encore en version alpha."
+        ],
+        "impact": "Une entreprise qui veut garder ses données en Europe dispose d'une alternative aux géants américains, mais doit la tester avant de s'y engager.",
+        "avis": "À compléter : ton avis en une ou deux phrases.",
+        "notes": {}
+      },
+      {
+        "date": "16 novembre 2026",
+        "cat": "Cybersécurité",
+        "title": "Des outils de pentest à base d'agents IA détournés par des attaquants",
+        "source": "LeMagIT",
+        "url": "https://www.lemagit.fr/actualites/366654832/Test-dintrusion-ces-framework-agentiques-detournes-a-des-fins-malveillantes",
+        "points": [
+          "Artex, un outil open source de test d'intrusion piloté par des agents IA, est utilisé par des groupes malveillants pour attaquer des organisations.",
+          "Microsoft rapporte qu'un groupe a obtenu des accès privilégiés à des infrastructures cloud en moins de 3 heures, et des milliers de serveurs Artex sont exposés sur Internet.",
+          "Plus de 45 outils offensifs de ce type existent : les attaques deviennent plus rapides et plus nombreuses, presque sans humain."
+        ],
+        "impact": "Le délai entre la détection d'une faille et l'attaque se raccourcit : correctifs, durcissement et surveillance des accès cloud ne peuvent plus attendre.",
+        "avis": "À compléter : ton avis en une ou deux phrases.",
+        "iso": "2026-11-16",
+        "author": "Valéry Rieß-Marchive",
+        "site": "lemagit.fr",
+        "keywords": "agents IA, test d'intrusion, Artex, cyberattaques, cloud",
+        "type": "Cybersécurité",
+        "notes": {}
+      },
+      {
+        "date": "16 novembre 2026",
+        "cat": "IA · Cloud",
+        "title": "IA en entreprise : une dépendance aux fournisseurs non européens qui s'accélère",
+        "source": "LeMagIT",
+        "url": "https://www.lemagit.fr/actualites/366654834/IA-la-dependance-en-accelere-etude",
+        "points": [
+          "Selon le baromètre de Tercio (énergie, transport, assurance), six actifs critiques sur dix dépendent de fournisseurs hors d'Europe, même avec des données hébergées en Europe.",
+          "En 2026, l'accès à plusieurs modèles d'IA a été restreint par décision administrative américaine, sans panne ni litige commercial.",
+          "Les plans de continuité prévoient les pannes, mais rarement l'arrêt d'un service décidé par le fournisseur ou un État."
+        ],
+        "impact": "Le service informatique doit savoir où tournent ses modèles d'IA et prévoir une solution de repli si un fournisseur coupe l'accès.",
+        "avis": "À compléter : ton avis en une ou deux phrases.",
+        "iso": "2026-11-16",
+        "author": "Philippe Ducellier",
+        "site": "lemagit.fr",
+        "keywords": "souveraineté, dépendance, résilience, fournisseurs IA, continuité d'activité",
+        "type": "Technologique",
+        "notes": {}
+      },
+      {
+        "date": "12 novembre 2026",
+        "cat": "Réglementation",
+        "title": "Recrutement par IA : les CNIL européennes lanceront un contrôle coordonné en 2027",
+        "source": "CNIL",
+        "url": "https://cnil.fr/fr/actualite-du-cepd-adequation-de-la-coree-du-sud-versions-finales-des-bcr-st-et-action-coordonnee-sur",
+        "points": [
+          "Le Comité européen de la protection des données (CEPD) a choisi le recrutement automatisé, notamment par IA, comme thème de sa sixième action coordonnée.",
+          "Les autorités vérifieront le respect du droit de ne pas subir une décision prise uniquement par une machine, et du droit d'accès des candidats.",
+          "L'action sera lancée en 2027 avec les autorités nationales volontaires."
+        ],
+        "impact": "Une entreprise qui trie des CV avec un outil d'IA doit garder une décision humaine et pouvoir expliquer le traitement aux candidats.",
+        "avis": "À compléter : ton avis en une ou deux phrases.",
+        "iso": "2026-11-12",
+        "author": "CNIL",
+        "site": "cnil.fr",
+        "keywords": "RGPD, recrutement, décision automatisée, CEPD, contrôle",
+        "type": "Juridique / réglementaire",
+        "notes": {}
+      },
+      {
         "date": "30 octobre 2026",
         "cat": "Cybersécurité",
         "title": "L'ANSSI publie ses sept principes pour sécuriser l'IA agentique",
@@ -671,6 +771,18 @@
       {
         "label": "Blog du Modérateur",
         "url": "https://www.blogdumoderateur.com/"
+      },
+      {
+        "label": "LeMagIT : actualité IT",
+        "url": "https://www.lemagit.fr/actualites"
+      },
+      {
+        "label": "CNIL : actualités",
+        "url": "https://www.cnil.fr/fr/actualites"
+      },
+      {
+        "label": "IT SOCIAL : actualité IT",
+        "url": "https://itsocial.fr/"
       }
     ],
     "doc": "",
