@@ -447,6 +447,46 @@
     "intro": "Je suis l'arrivée de l'IA générative et des agents IA dans les entreprises : ce qu'ils apportent, les risques qu'ils créent pour la sécurité et les données, et le cadre légal qui les encadre.",
     "articles": [
       {
+        "date": "19 novembre 2026",
+        "iso": "2026-11-19",
+        "cat": "Cybersécurité",
+        "type": "Cybersécurité",
+        "title": "La Commission européenne touchée par une cyberattaque menée avec un outil d'IA offensif",
+        "source": "LeMagIT",
+        "author": "Valéry Rieß-Marchive",
+        "site": "lemagit.fr",
+        "url": "https://www.lemagit.fr/actualites/366654993/La-Commission-Europeenne-frappee-par-une-lourde-cyberattaque",
+        "keywords": "cyberattaque, agents IA offensifs, Artex, CERT-EU, Commission européenne",
+        "points": [
+          "Une cyberattaque empêche le personnel de la Commission européenne de saisir salaires et absences ; elle est jugée « essentiellement contenue », mais les dégâts restent à évaluer.",
+          "L'attaque implique Artex, un outil de test d'intrusion piloté par des agents IA, sur lequel le CERT-EU et le FBI avaient déjà alerté début novembre.",
+          "La campagne liée aurait visé plus de 200 organisations depuis mi-octobre, et Microsoft l'attribue en partie à un groupe lié à la Chine."
+        ],
+        "impact": "Les attaques automatisées par IA vont plus vite : il faut surveiller en continu, détecter tôt et appliquer les alertes des CERT sans attendre.",
+        "avis": "À compléter : ton avis en une ou deux phrases.",
+        "notes": {}
+      },
+      {
+        "date": "19 novembre 2026",
+        "iso": "2026-11-19",
+        "cat": "Cloud · IA",
+        "type": "Cloud",
+        "title": "OVHcloud lance son propre modèle d'IA et se présente comme fournisseur souverain pour les entreprises",
+        "source": "IT SOCIAL",
+        "author": "Mourad Krim",
+        "site": "itsocial.fr",
+        "url": "https://itsocial.fr/contenus/actualites/intelligence-artificielle-actualites-contenus/avec-olala-son-modele-frugal-et-une-pile-integree-ovhcloud-se-pose-en-fournisseur-souverain-de-lia-dentreprise/",
+        "keywords": "OVHcloud, IA souveraine, Olala, cloud européen, SecNumCloud",
+        "points": [
+          "Lors de son AI Summit, OVHcloud a présenté Olala, un modèle d'IA léger qui peut tourner sur un simple GPU de 8 Go.",
+          "Les services IA (agents, espace de travail) peuvent être déployés en cloud public, en cloud privé ou sur site, y compris sous qualification SecNumCloud.",
+          "Le journaliste reste prudent : aucun score d'évaluation publié et beaucoup de nouveautés encore en version alpha."
+        ],
+        "impact": "Une entreprise qui veut garder ses données en Europe dispose d'une alternative aux géants américains, mais doit la tester avant de s'y engager.",
+        "avis": "À compléter : ton avis en une ou deux phrases.",
+        "notes": {}
+      },
+      {
         "date": "16 novembre 2026",
         "cat": "Cybersécurité",
         "title": "Des outils de pentest à base d'agents IA détournés par des attaquants",
@@ -739,6 +779,10 @@
       {
         "label": "CNIL : actualités",
         "url": "https://www.cnil.fr/fr/actualites"
+      },
+      {
+        "label": "IT SOCIAL : actualité IT",
+        "url": "https://itsocial.fr/"
       }
     ],
     "doc": "",
