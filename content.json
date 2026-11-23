@@ -447,6 +447,46 @@
     "intro": "Je suis l'arrivée de l'IA générative et des agents IA dans les entreprises : ce qu'ils apportent, les risques qu'ils créent pour la sécurité et les données, et le cadre légal qui les encadre.",
     "articles": [
       {
+        "date": "20 novembre 2026",
+        "iso": "2026-11-20",
+        "cat": "Infrastructure",
+        "type": "Infrastructure",
+        "title": "Windows Server 2028 : un serveur durci par défaut et des VM mieux protégées",
+        "source": "Next",
+        "author": "Vincent Hermann",
+        "site": "next.ink",
+        "url": "https://next.ink/268563/windows-server-2028-va-durcir-sa-base-et-activer-trusted-launch-pour-les-vm/",
+        "keywords": "Windows Server 2028, durcissement, Trusted Launch, Hyper-V, IA sur site",
+        "points": [
+          "Microsoft a présenté une première préversion de Windows Server 2028, attendu en 2027, avec des centaines de réglages de sécurité appliqués dès l'installation.",
+          "Kerberos remplace NTLM par défaut, LSASS est protégé, la signature SMB et le pare-feu sont activés, ce qui peut casser d'anciens outils ou scripts.",
+          "Les VM Hyper-V gagnent le Trusted Launch (Secure Boot et TPM virtuel), et le système prévoit de faire tourner des modèles d'IA sur les serveurs de l'entreprise."
+        ],
+        "impact": "Le service informatique doit tester dès maintenant la compatibilité de ses applications et de ses scripts avec ce durcissement avant de migrer ses serveurs.",
+        "avis": "À compléter : ton avis en une ou deux phrases.",
+        "notes": {}
+      },
+      {
+        "date": "20 novembre 2026",
+        "iso": "2026-11-20",
+        "cat": "Réglementation",
+        "type": "Juridique / réglementaire",
+        "title": "IA à l'école : les CNIL du monde entier adoptent des règles pour protéger les données",
+        "source": "CNIL",
+        "author": "CNIL",
+        "site": "cnil.fr",
+        "url": "https://cnil.fr/fr/gpa-ia-education",
+        "keywords": "CNIL, RGPD, IA, éducation, analyse d'impact",
+        "points": [
+          "Les autorités de protection des données réunies dans l'Assemblée mondiale de la vie privée ont adopté une résolution sur l'IA dans l'éducation, portée par la CNIL.",
+          "Elle fixe onze principes, dont l'intérêt de l'enfant, l'analyse d'impact avant déploiement, la protection des données dès la conception et la transparence des décisions automatisées.",
+          "Un modèle de charte IA pour les établissements est fourni, et d'autres résolutions ont été adoptées, notamment sur l'IA agentique."
+        ],
+        "impact": "Avant de déployer un outil d'IA qui traite des données personnelles, une organisation doit prévoir une analyse d'impact et expliquer clairement comment l'outil décide.",
+        "avis": "À compléter : ton avis en une ou deux phrases.",
+        "notes": {}
+      },
+      {
         "date": "30 octobre 2026",
         "cat": "Cybersécurité",
         "title": "L'ANSSI publie ses sept principes pour sécuriser l'IA agentique",
@@ -671,6 +711,10 @@
       {
         "label": "Blog du Modérateur",
         "url": "https://www.blogdumoderateur.com/"
+      },
+      {
+        "label": "CNIL : intelligence artificielle",
+        "url": "https://www.cnil.fr/fr/intelligence-artificielle"
       }
     ],
     "doc": "",
