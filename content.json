@@ -447,6 +447,66 @@
     "intro": "Je suis l'arrivée de l'IA générative et des agents IA dans les entreprises : ce qu'ils apportent, les risques qu'ils créent pour la sécurité et les données, et le cadre légal qui les encadre.",
     "articles": [
       {
+        "date": "23 novembre 2026",
+        "iso": "2026-11-23",
+        "cat": "Cybersécurité",
+        "type": "Cybersécurité",
+        "title": "Agents IA : la gestion des API ne suffit plus à les sécuriser",
+        "source": "Le Monde Informatique",
+        "author": "Mohamed Ali Souissi",
+        "site": "lemondeinformatique.fr",
+        "url": "https://www.lemondeinformatique.fr/donnees-ia/mourad-jaakou-axway-l-api-management-ne-suffit-plus-a-securiser-les-agents-ia",
+        "keywords": "agents IA, MCP, habilitations, fuite de données, gouvernance",
+        "points": [
+          "Selon un responsable d'Axway, la DSI doit recenser chaque agent IA, gérer ses droits et contrôler ce qu'il fait.",
+          "Quatre risques sont cités : erreurs de l'agent, agent utilisé comme porte d'entrée dans le SI, coût en jetons et fuites de données.",
+          "Les protocoles MCP et A2A, qui relient les agents aux outils, deviennent de nouvelles surfaces d'attaque (entretien avec un éditeur, donc en partie promotionnel)."
+        ],
+        "impact": "Le service informatique doit traiter chaque agent IA comme un compte à part entière : inventaire, droits minimaux et journalisation de ses actions.",
+        "avis": "À compléter : ton avis en une ou deux phrases.",
+        "notes": {}
+      },
+      {
+        "date": "23 novembre 2026",
+        "iso": "2026-11-23",
+        "cat": "Cloud",
+        "type": "Cloud",
+        "title": "Trump menace de taxer les datacenters américains construits à l'étranger",
+        "source": "Le Monde Informatique",
+        "author": "Mohamed Ali Souissi",
+        "site": "lemondeinformatique.fr",
+        "url": "https://www.lemondeinformatique.fr/donnees-ia/trump-menace-de-taxer-les-datacenters-americains-construits-a-l-etranger",
+        "keywords": "datacenters, cloud, souveraineté, hyperscalers, localisation des données",
+        "points": [
+          "Le 20 novembre 2026, Donald Trump a annoncé vouloir pénaliser fiscalement les entreprises américaines qui construisent des datacenters hors des États-Unis.",
+          "AWS, Microsoft et Google Cloud pourraient être touchés, alors que leurs régions européennes répondent à des besoins de latence et de localisation des données.",
+          "Aucun texte n'est publié pour l'instant : c'est une intention politique, sans taux ni calendrier."
+        ],
+        "impact": "Une entreprise qui héberge ses services IA chez un fournisseur américain doit surveiller la pérennité de ses régions européennes et garder un plan B souverain.",
+        "avis": "À compléter : ton avis en une ou deux phrases.",
+        "notes": {}
+      },
+      {
+        "date": "20 novembre 2026",
+        "iso": "2026-11-20",
+        "cat": "Réglementation",
+        "type": "Juridique / réglementaire",
+        "title": "IA et éducation : une résolution mondiale pour protéger les données des élèves",
+        "source": "CNIL",
+        "author": "CNIL",
+        "site": "cnil.fr",
+        "url": "https://cnil.fr/fr/gpa-ia-education",
+        "keywords": "CNIL, RGPD, IA, éducation, analyse d'impact",
+        "points": [
+          "L'Assemblée mondiale pour la protection de la vie privée (GPA) a adopté une résolution sur l'IA dans l'éducation.",
+          "Elle fixe 11 principes, dont l'analyse d'impact, la sécurité des données et l'encadrement des décisions automatisées.",
+          "Elle propose aussi des outils concrets, comme un modèle de charte pour les établissements."
+        ],
+        "impact": "Les éditeurs et services informatiques qui déploient de l'IA auprès d'élèves devront prévoir une analyse d'impact et des mesures de sécurité dès la conception.",
+        "avis": "À compléter : ton avis en une ou deux phrases.",
+        "notes": {}
+      },
+      {
         "date": "30 octobre 2026",
         "cat": "Cybersécurité",
         "title": "L'ANSSI publie ses sept principes pour sécuriser l'IA agentique",
@@ -671,6 +731,10 @@
       {
         "label": "Blog du Modérateur",
         "url": "https://www.blogdumoderateur.com/"
+      },
+      {
+        "label": "Le Monde Informatique : Données & IA",
+        "url": "https://www.lemondeinformatique.fr/donnees-ia"
       }
     ],
     "doc": "",
