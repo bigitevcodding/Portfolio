@@ -398,12 +398,32 @@ function veilleHTML() {
   const bars = rows => { const m = Math.max(1, ...rows.map(r => r[1])); return rows.map(([k, v]) => `<div class="v-bar"><span>${esc(k)}</span><i><b style="width:${v / m * 100}%"></b></i><em>${v}</em></div>`).join(''); };
   const yearOf = a => (a.iso || '').slice(0, 4) || (a.date || '').slice(-4);
   const reco = s => s >= .75 * max ? ['Retenir', 'ok'] : s > seuil ? ['À vérifier', 'mid'] : ['Écarté', 'no'];
-  const latest = pub.slice().sort((x, y) => (y.iso || '').localeCompare(x.iso || ''))[0];
+  const byDate = arr => arr.slice().sort((x, y) => (y.iso || '').localeCompare(x.iso || ''));
+  const recent = byDate(pub).slice(0, 3), todoSorted = byDate(todo);
+  const MOIS = { janvier: 'janv.', février: 'févr.', mars: 'mars', avril: 'avr.', mai: 'mai', juin: 'juin', juillet: 'juil.', août: 'août', septembre: 'sept.', octobre: 'oct.', novembre: 'nov.', décembre: 'déc.' };
+  const fmtDay = a => { const m = (a.date || '').match(/^(\d{1,2})\s+(\S+)\s+(\d{4})$/); return m ? `<b>${esc(m[1])}</b><span>${esc(MOIS[m[2].toLowerCase()] || m[2])}</span><span>${esc(m[3])}</span>` : `<span>${esc(a.date || '')}</span>`; };
+  const lastRow = (a, todoRow) => `<li class="v-last-row">
+      <div class="v-last-date" aria-hidden="true">${fmtDay(a)}</div>
+      <div class="v-last-body">
+        <p class="v-last-meta">${a.cat ? `<span class="v-cat">${esc(a.cat)}</span>` : ''}<span>${esc(a.source || '')}</span><span class="sr-only">, ${esc(a.date || '')}</span></p>
+        <h4>${a.url ? `<a href="${safeUrl(a.url)}" target="_blank" rel="noopener noreferrer">${esc(a.title || '')}<span class="v-last-arr" aria-hidden="true"> ↗</span></a>` : esc(a.title || '')}</h4>
+      </div>
+      <span class="v-score v-${todoRow ? 'mid' : reco(a._s)[1]}">${todoRow ? 'À noter' : `${a._s}/${max}`}</span>
+    </li>`;
   return `<div class="wrap">
     <a href="#/" class="back pg-anim">← Retour</a>
     <p class="mono muted mt-12 pg-anim">Veille technologique</p>
     <h1 class="pg-title"><span class="mask"><span class="mask-in">${ttl(V.subject || 'Veille technologique')}</span></span></h1>
     ${V.intro ? `<p class="pg-lead pg-anim">${inline(V.intro)}</p>` : ''}
+    <section class="sec"><h3 class="mono muted">Derniers articles</h3><div class="sec-body">
+      ${adm && todoSorted.length ? `<div class="v-last v-last-todo">
+        <p class="v-last-head"><b>${todoSorted.length} article${todoSorted.length > 1 ? 's' : ''} à noter</b><span>Visible seulement en mode admin · note chaque fiche plus bas pour la publier</span></p>
+        <ul>${todoSorted.map(a => lastRow(a, true)).join('')}</ul></div>` : ''}
+      <div class="v-last">
+        <p class="v-last-head"><b>Derniers articles publiés</b><span>${recent.length ? `Mis à jour le ${esc(recent[0].date || '')}` : 'Aucun article publié pour l\'instant'}</span></p>
+        ${recent.length ? `<ul>${recent.map(a => lastRow(a, false)).join('')}</ul>` : ''}
+      </div>
+    </div></section>
     <section class="sec"><h3 class="mono muted">Statistiques</h3><div class="sec-body">
       <div class="v-kpis">
         <div><b>${pub.length}</b><span>articles publiés</span></div>
@@ -416,7 +436,7 @@ function veilleHTML() {
         <div><p class="mono muted">Par année de parution</p>${bars(count(pub, yearOf).sort((x, y) => y[0].localeCompare(x[0])))}</div>
         <div><p class="mono muted">Par source</p>${bars(count(pub, a => a.source).slice(0, 6))}</div>
       </div>
-      <p class="mono muted v-upd">Calculé automatiquement à partir des notes · dernier article publié : ${latest ? esc(latest.date) : '—'}${adm && todo.length ? ` · <span class="accent">${todo.length} à noter</span>` : ''}</p>
+      <p class="mono muted v-upd">Calculé automatiquement à partir des notes</p>
     </div></section>
     <section class="sec"><h3 class="mono muted">Méthodologie</h3><div class="sec-body">
       <div class="v-flow">${['Claude', 'GitHub', 'Moi : lecture et note', `Filtre > ${seuil}/${max}`, 'Vercel'].map(x => `<span>${esc(x)}</span>`).join('<i>→</i>')}</div>
