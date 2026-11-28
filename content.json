@@ -463,7 +463,8 @@
           "Le professionnel reste responsable de ses décisions : la supervision humaine est obligatoire et la réutilisation des données de santé doit être surveillée."
         ],
         "impact": "Avant de déployer un outil d'IA, le service informatique doit prévoir avec la direction qui le pilote, comment ses usages sont tracés et quelles données il peut utiliser.",
-        "avis": "Ce guide est une bonne idée, mais aujourd'hui les pirates ont eux aussi accès à des IA tout aussi performantes pour attaquer, et chaque outil d'IA ajouté dans un hôpital crée de nouvelles données à protéger. Sachant que la France est l'un des pays les plus visés par les cyberattaques, ces outils pourraient devenir une nouvelle brèche pour les pirates : des règles de bon usage ne suffiront pas sans une vraie sécurité technique derrière."
+        "avis": "Ce guide est une bonne idée, mais aujourd'hui les pirates ont eux aussi accès à des IA tout aussi performantes pour attaquer, et chaque outil d'IA ajouté dans un hôpital crée de nouvelles données à protéger. Sachant que la France est l'un des pays les plus visés par les cyberattaques, ces outils pourraient devenir une nouvelle brèche pour les pirates : des règles de bon usage ne suffiront pas sans une vraie sécurité technique derrière.",
+        "note": 23
       },
       {
         "date": "25 novembre 2026",
@@ -482,7 +483,8 @@
           "Le but est de pouvoir stopper un agent IA incontrôlé et couper toutes ses communications depuis une seule console."
         ],
         "impact": "Les entreprises doivent prévoir dès maintenant un moyen fiable d'arrêter un agent IA qui dérape, sur les postes comme sur le réseau.",
-        "avis": "Ce rachat me paraît être un bon projet : réunir la protection des postes et le Zero Trust réseau permettra d'arrêter un agent IA incontrôlé en un seul clic, et ce kill switch répond à un vrai besoin de sécurité pour les entreprises."
+        "avis": "Ce rachat me paraît être un bon projet : réunir la protection des postes et le Zero Trust réseau permettra d'arrêter un agent IA incontrôlé en un seul clic, et ce kill switch répond à un vrai besoin de sécurité pour les entreprises. La mise en place est annoncée en 2026 donc impossible de se projeter aussi loin pour l'instant.",
+        "note": 31
       },
       {
         "date": "30 octobre 2026",
