@@ -388,9 +388,98 @@ function vScore(a, V) {
   return V_CRIT.reduce((s, [k]) => s + n[k] * (w[k] || 0), 0);
 }
 const vMax = V => 4 * V_CRIT.reduce((s, [k]) => s + ((V.weights || {})[k] || 0), 0) || 40;
+// Veille : une carte = un article, un clic ouvre sa fiche détaillée
+const vReco = (s, V) => { const max = vMax(V), seuil = V.threshold ?? 20; return s === null ? ['À noter', 'mid'] : s >= .75 * max ? ['Retenu', 'ok'] : s > seuil ? ['À vérifier', 'mid'] : ['Écarté', 'no']; };
+function vGroup(title, arr, max, seuil, adm, intro) {
+  const list = arr.slice().sort((x, y) => (y.iso || '').localeCompare(x.iso || ''));
+  const V = CONFIG.veille || {};
+  return `<section class="sec v-group"><h3 class="mono muted">${esc(title)} <span class="v-count">${list.length}</span></h3><div class="sec-body">
+    ${intro ? `<p class="v-gintro">${esc(intro)}</p>` : ''}
+    ${list.length ? `<div class="v-grid">${list.map(a => { const r = vReco(a._s, V); return `
+      <article class="v-card${a._s !== null && a._s <= seuil ? ' v-low' : ''}">
+        <p class="mono muted v-top"><span>${esc(a.date || '')}</span><span class="v-score v-${r[1]}">${a._s === null ? 'À noter' : `${a._s}/${max}`}</span></p>
+        <h4><button type="button" class="v-open" data-v="${a._i}">${esc(a.title || '')}</button></h4>
+        <p class="v-meta">${a.cat ? `<span class="v-cat">${esc(a.cat)}</span>` : ''}<span>${esc(a.source || '')}</span></p>
+        <div class="v-foot"><span class="v-more" aria-hidden="true">Voir le résumé →</span>${adm ? `<button type="button" class="v-rate${a._s === null ? ' is-todo' : ''}" data-v="${a._i}" data-rate="1">${a._s === null ? 'Noter' : 'Modifier la note'}</button>` : ''}</div>
+      </article>`; }).join('')}</div>` : `<div class="ph">Aucun article dans cette rubrique.</div>`}
+  </div></section>`;
+}
+const V_HINTS = {
+  pertinence: ['Hors sujet', 'Lien faible', 'En lien', 'Au cœur du sujet'],
+  date: ['3 ans ou plus', 'Environ 2 ans', 'Environ 1 an', "Moins d'un an"],
+  auteur: ['Commercial ou anonyme', 'Peu connu', 'Média spécialisé', 'Organisme officiel']
+};
+let vDlg = null, vCur = -1;
+function vDialogHTML(i) {
+  const V = CONFIG.veille || {}, a = (V.articles || [])[i]; if (!a) return '';
+  const s = vScore(a, V), max = vMax(V), seuil = V.threshold ?? 20, r = vReco(s, V), w = V.weights || {}, n = a.notes || {}, adm = isAdm();
+  const kw = String(a.keywords || '').split(',').map(x => x.trim()).filter(Boolean);
+  return `<div class="v-dlg-in">
+    <div class="v-dlg-top">
+      <div class="v-dlg-score v-${r[1]}"><b>${s === null ? '—' : s}<small>/${max}</small></b><span>${esc(r[0])}</span></div>
+      <button type="button" class="v-dlg-x" data-vclose aria-label="Fermer">✕</button>
+    </div>
+    <div class="v-dlg-crit">${V_CRIT.map(([k, l]) => `<div><span>${esc(l)}</span><b>${n[k] ? `${n[k]}/4` : '—'}</b><small>×${esc(w[k] ?? '—')}</small></div>`).join('')}</div>
+    <p class="v-dlg-meta">${a.cat ? `<span class="v-cat">${esc(a.cat)}</span>` : ''}<span>${esc(a.date || '')}</span></p>
+    <h2 id="v-dlg-title">${esc(a.title || '')}</h2>
+    ${(a.points || []).length ? `<h3>Résumé</h3><ul class="v-pts">${a.points.map(x => `<li>${inline(x)}</li>`).join('')}</ul>` : ''}
+    ${a.impact ? `<h3>Impact pour l'entreprise</h3><p>${inline(a.impact)}</p>` : ''}
+    ${!adm && a.avis && !isTodo(a.avis) ? `<h3>Mon avis</h3><p class="v-dlg-avis">${inline(a.avis)}</p>` : ''}
+    <h3>Source</h3>
+    <dl class="v-dlg-src">
+      <div><dt>Média</dt><dd>${esc(a.source || '—')}</dd></div>
+      <div><dt>Auteur</dt><dd>${esc(a.author || a.source || '—')}</dd></div>
+      <div><dt>Site</dt><dd>${esc(a.site || '—')}</dd></div>
+      ${kw.length ? `<div><dt>Mots-clés</dt><dd class="v-kws">${kw.map(x => `<span>${esc(x)}</span>`).join('')}</dd></div>` : ''}
+    </dl>
+    ${a.url ? `<a class="btn v-dlg-link" href="${safeUrl(a.url)}" target="_blank" rel="noopener noreferrer">Lire l'article original ↗</a>` : ''}
+    ${adm ? `<div class="v-rate-box" id="v-rate-box">
+      <h3>Ma note</h3>
+      <p class="v-gintro">Choisis une note de 1 à 4 pour chaque critère. Le score se calcule tout seul. Seuil de publication : plus de ${seuil}/${max}.</p>
+      ${V_CRIT.map(([k, l]) => `<fieldset class="v-rate-row"><legend>${esc(l)} <small>×${esc(w[k] ?? '—')}</small></legend>
+        <div class="v-seg">${[1, 2, 3, 4].map(v => `<button type="button" data-vnote="${k}" data-val="${v}" aria-pressed="${n[k] === v}"><b>${v}</b><span>${esc(V_HINTS[k][v - 1])}</span></button>`).join('')}</div></fieldset>`).join('')}
+      <label class="v-avis-lbl" for="v-avis">Mon avis (une ou deux phrases)</label>
+      <textarea id="v-avis" rows="4" placeholder="Ce que tu penses de cet article…">${esc(isTodo(a.avis) ? '' : a.avis || '')}</textarea>
+      <p class="v-gintro">Tes changements s'affichent tout de suite. Pour les mettre en ligne, clique sur <b>Publier</b> dans la barre d'administration.</p>
+    </div>` : ''}
+  </div>`;
+}
+function vOpen(i, toRate) {
+  if (!vDlg) {
+    vDlg = document.createElement('dialog'); vDlg.className = 'v-dlg'; vDlg.setAttribute('aria-labelledby', 'v-dlg-title'); vDlg.setAttribute('data-lenis-prevent', '');
+    document.body.append(vDlg);
+    vDlg.addEventListener('click', e => {
+      if (e.target === vDlg || e.target.closest('[data-vclose]')) return vDlg.close();
+      const b = e.target.closest('[data-vnote]'); if (!b || !isAdm()) return;
+      const a = CONFIG.veille.articles[vCur]; a.notes = a.notes || {};
+      a.notes[b.dataset.vnote] = +b.dataset.val; vRefresh();
+    });
+    vDlg.addEventListener('input', e => {
+      if (e.target.id !== 'v-avis' || !isAdm()) return;
+      const a = CONFIG.veille.articles[vCur], t = e.target.value.trim();
+      a.avis = t || 'À compléter : ton avis en une ou deux phrases.';
+      window.ADMIN.changed && window.ADMIN.changed();
+    });
+    vDlg.addEventListener('close', () => { root.classList.remove('v-dlg-open'); const f = document.querySelector(`[data-v="${vCur}"]`); f && f.focus({ preventScroll: true }); });
+  }
+  vCur = i; vDlg.innerHTML = vDialogHTML(i); vDlg.scrollTop = 0;
+  if (!vDlg.open) vDlg.showModal();
+  root.classList.add('v-dlg-open');
+  if (toRate) { const r = $('#v-rate-box', vDlg); r && r.scrollIntoView({ block: 'start' }); }
+}
+function vRefresh() {
+  const box = $('#v-rate-box', vDlg), y = vDlg.scrollTop, avis = $('#v-avis', vDlg), val = avis ? avis.value : null;
+  vDlg.innerHTML = vDialogHTML(vCur); vDlg.scrollTop = y;
+  if (val !== null && $('#v-avis', vDlg)) $('#v-avis', vDlg).value = val;
+  window.ADMIN && window.ADMIN.changed && window.ADMIN.changed();
+}
+document.addEventListener('click', e => {
+  const b = e.target.closest('#page [data-v]'); if (!b) return;
+  e.preventDefault(); e.stopImmediatePropagation(); vOpen(+b.dataset.v, !!b.dataset.rate);
+}, true);
 function veilleHTML() {
   const V = CONFIG.veille || { articles: [], sources: [] }, S = V.sources || [], seuil = V.threshold ?? 20, max = vMax(V);
-  const all = (V.articles || []).map(a => ({ ...a, _s: vScore(a, V) }));
+  const all = (V.articles || []).map((a, i) => ({ ...a, _s: vScore(a, V), _i: i }));
   const pub = all.filter(a => a._s !== null && a._s > seuil), out = all.filter(a => a._s !== null && a._s <= seuil), todo = all.filter(a => a._s === null);
   const adm = window.ADMIN && window.ADMIN.on, shown = adm ? all : pub;
   const avg = pub.length ? pub.reduce((s, a) => s + a._s, 0) / pub.length : 0;
@@ -406,7 +495,7 @@ function veilleHTML() {
       <div class="v-last-date" aria-hidden="true">${fmtDay(a)}</div>
       <div class="v-last-body">
         <p class="v-last-meta">${a.cat ? `<span class="v-cat">${esc(a.cat)}</span>` : ''}<span>${esc(a.source || '')}</span><span class="sr-only">, ${esc(a.date || '')}</span></p>
-        <h4>${a.url ? `<a href="${safeUrl(a.url)}" target="_blank" rel="noopener noreferrer">${esc(a.title || '')}<span class="v-last-arr" aria-hidden="true"> ↗</span></a>` : esc(a.title || '')}</h4>
+        <h4><button type="button" class="v-last-open" data-v="${a._i}">${esc(a.title || '')}<span class="v-last-arr" aria-hidden="true"> →</span></button></h4>
       </div>
       <span class="v-score v-${todoRow ? 'mid' : reco(a._s)[1]}">${todoRow ? 'À noter' : `${a._s}/${max}`}</span>
     </li>`;
@@ -417,7 +506,7 @@ function veilleHTML() {
     ${V.intro ? `<p class="pg-lead pg-anim">${inline(V.intro)}</p>` : ''}
     <section class="sec"><h3 class="mono muted">Derniers articles</h3><div class="sec-body">
       ${adm && todoSorted.length ? `<div class="v-last v-last-todo">
-        <p class="v-last-head"><b>${todoSorted.length} article${todoSorted.length > 1 ? 's' : ''} à noter</b><span>Visible seulement en mode admin · note chaque fiche plus bas pour la publier</span></p>
+        <p class="v-last-head"><b>${todoSorted.length} article${todoSorted.length > 1 ? 's' : ''} à noter</b><span>Visible seulement en mode admin · clique sur un titre pour le noter</span></p>
         <ul>${todoSorted.map(a => lastRow(a, true)).join('')}</ul></div>` : ''}
       <div class="v-last">
         <p class="v-last-head"><b>Derniers articles publiés</b><span>${recent.length ? `Mis à jour le ${esc(recent[0].date || '')}` : 'Aucun article publié pour l\'instant'}</span></p>
@@ -443,15 +532,12 @@ function veilleHTML() {
       <ol class="v-steps">${(V.steps || []).map((s, i) => `<li><span class="mono">${String(i + 1).padStart(2, '0')}</span><div><h4>${esc(s.title || '')}</h4><p>${inline(s.text || '')}</p></div></li>`).join('')}</ol>
       <p class="v-grid-note">Barème : ${V_CRIT.map(([k, l]) => `${esc(l)} ×${esc((V.weights || {})[k] ?? '—')}`).join(' · ')} — chaque critère noté de 1 à 4.</p>
     </div></section>
-    <section class="sec"><h3 class="mono muted">Articles</h3><div class="sec-body"><div class="v-grid">${shown.map(a => { const r = a._s === null ? ['À noter', 'mid'] : reco(a._s); return `
-      <article class="v-card${adm && !(a._s > seuil) ? ' v-off' : ''}">
-        <p class="mono muted v-top"><span>${esc(a.date || '')}</span>${a.cat ? `<span class="v-cat">${esc(a.cat)}</span>` : ''}</p>
-        <h4>${esc(a.title || '')}</h4>
-        ${(a.points || []).length ? `<ul class="v-pts">${a.points.map(x => `<li>${inline(x)}</li>`).join('')}</ul>` : ''}
-        ${a.impact ? `<p class="v-note"><b>Impact entreprise</b>${inline(a.impact)}</p>` : ''}
-        ${a.avis && (adm || !isTodo(a.avis)) ? `<p class="v-note${isTodo(a.avis) ? ' is-todo' : ''}"><b>Mon avis</b>${inline(a.avis)}</p>` : ''}
-        <div class="v-foot">${a.url ? `<a class="v-src" href="${safeUrl(a.url)}" target="_blank" rel="noopener noreferrer">Source : ${esc(a.source || "lire l'article")} ↗</a>` : '<span></span>'}<span class="v-score v-${r[1]}">${a._s === null ? r[0] : `${a._s}/${max}`}</span></div>
-      </article>`; }).join('') || '<div class="ph">Aucun article publié pour l\'instant…</div>'}</div></div></section>
+    ${adm ? `
+    ${vGroup('À noter', todo, max, seuil, true, 'Clique sur « Noter » : trois notes de 1 à 4 et ton avis. Ces fiches restent masquées tant qu\'elles ne sont pas notées.')}
+    ${vGroup('Publiés', pub, max, seuil, true, `Notés à plus de ${seuil}/${max} : visibles par les visiteurs.`)}
+    ${vGroup('Écartés', out, max, seuil, true, `Notés à ${seuil}/${max} ou moins : affichés à part, dans la section « Articles écartés ».`)}` : `
+    ${vGroup('Articles retenus', pub, max, seuil, false, 'Clique sur un article pour lire son résumé, ma note détaillée et mon avis.')}
+    ${out.length ? vGroup('Articles écartés', out, max, seuil, false, `Ces articles ont été lus et notés, mais ils n'atteignent pas ${seuil}/${max} : source peu fiable, sujet trop éloigné ou information trop ancienne. Je les garde visibles pour montrer ce que ma méthode filtre.`) : ''}`}
     <section class="sec v-tsec"><h3 class="mono muted">Tableau d'analyse des sources</h3><div class="sec-body">
       <p class="v-tintro">Chaque source est notée de 1 à 4 sur trois critères pondérés. Seules celles à plus de ${seuil}/${max} sont publiées.</p>
       <div class="v-tbl-wrap"><table class="v-tbl">
@@ -614,6 +700,7 @@ setInterval(() => { if (busy && performance.now() - (window.__navT || 0) > 4000)
 addEventListener('keydown', e => {
   if (e.key !== 'Escape') return;
   if (!lb.hidden) return closeLb();
+  if (vDlg && vDlg.open) return;                                           // la fiche de veille se ferme seule (Échap natif)
   if (document.querySelector('.adm-modal, .adm-drawer.open')) return;      // en mode admin, Échap ne quitte pas la page en cours d'édition
   if (current !== 'home') location.hash = '#/';
 });
