@@ -463,7 +463,7 @@
           "Le professionnel reste responsable de ses décisions : la supervision humaine est obligatoire et la réutilisation des données de santé doit être surveillée."
         ],
         "impact": "Avant de déployer un outil d'IA, le service informatique doit prévoir avec la direction qui le pilote, comment ses usages sont tracés et quelles données il peut utiliser.",
-        "avis": "À compléter : ton avis en une ou deux phrases.",
+        "avis": "Ce guide est une bonne idée, mais aujourd'hui les pirates ont eux aussi accès à des IA tout aussi performantes pour attaquer, et chaque outil d'IA ajouté dans un hôpital crée de nouvelles données à protéger. Sachant que la France est l'un des pays les plus visés par les cyberattaques, ces outils pourraient devenir une nouvelle brèche pour les pirates : des règles de bon usage ne suffiront pas sans une vraie sécurité technique derrière.",
         "notes": {}
       },
       {
@@ -483,7 +483,7 @@
           "Le but est de pouvoir stopper un agent IA incontrôlé et couper toutes ses communications depuis une seule console."
         ],
         "impact": "Les entreprises doivent prévoir dès maintenant un moyen fiable d'arrêter un agent IA qui dérape, sur les postes comme sur le réseau.",
-        "avis": "À compléter : ton avis en une ou deux phrases.",
+        "avis": "Ce rachat me paraît être un bon projet : réunir la protection des postes et le Zero Trust réseau permettra d'arrêter un agent IA incontrôlé en un seul clic, et ce kill switch répond à un vrai besoin de sécurité pour les entreprises.",
         "notes": {}
       },
       {
@@ -749,7 +749,7 @@
       },
       {
         "title": "Mon analyse",
-        "text": "Pour chaque article retenu, j'ajoute mon avis personnel et l'impact concret pour un service informatique."
+        "text": ""
       },
       {
         "title": "Publication",
