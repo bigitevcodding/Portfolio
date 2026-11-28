@@ -409,6 +409,7 @@
     toast('Session admin verrouillée après 20 minutes sans activité. Ton brouillon est conservé sur cet appareil.', 9000);
   }, 15000);
   ADMIN.logout = logout;
+  ADMIN.changed = changed;                                 // utilisé par la fiche de notation de la veille
 
   // En mode édition, un clic sur une case ouvre l'éditeur au lieu de la page
   document.addEventListener('click', e => {

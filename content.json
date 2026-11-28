@@ -607,6 +607,30 @@
         }
       },
       {
+        "date": "14 décembre 2024",
+        "iso": "2024-12-14",
+        "cat": "IA",
+        "type": "Technologique",
+        "title": "Les 25 « meilleurs » outils d'IA de productivité selon le blog de ClickUp",
+        "source": "Blog ClickUp",
+        "author": "Manasi Nair (ClickUp)",
+        "site": "clickup.com",
+        "url": "https://clickup.com/fr-FR/blog/244194/outils-dia-productivite",
+        "keywords": "outils IA, productivité, comparatif, marketing",
+        "points": [
+          "Le blog de l'éditeur ClickUp présente 25 outils d'IA pour la productivité, classés par usage, avec leurs prix et leurs notes d'utilisateurs.",
+          "Son propre produit, ClickUp Brain, est placé en tête de la liste.",
+          "Le titre annonce « 2026 » alors que l'article a été publié en décembre 2024 : c'est un contenu commercial, pas une comparaison neutre."
+        ],
+        "impact": "Un service informatique ne peut pas choisir un outil d'IA à partir d'un comparatif écrit par un éditeur : il faut des tests internes et une vérification sécurité et RGPD.",
+        "avis": "À compléter : ton avis en une ou deux phrases.",
+        "notes": {
+          "pertinence": 2,
+          "date": 2,
+          "auteur": 1
+        }
+      },
+      {
         "date": "4 octobre 2024",
         "cat": "Cybersécurité",
         "title": "L'ANSSI et le BSI encadrent les assistants de programmation basés sur l'IA",
@@ -628,6 +652,30 @@
           "pertinence": 3,
           "date": 2,
           "auteur": 4
+        }
+      },
+      {
+        "date": "11 juin 2024",
+        "iso": "2024-06-11",
+        "cat": "IA",
+        "type": "Technologique",
+        "title": "Apple Intelligence : Apple ajoute l'IA générative à l'iPhone, l'iPad et le Mac",
+        "source": "Siècle Digital",
+        "author": "Grégoire Levy",
+        "site": "siecledigital.fr",
+        "url": "https://siecledigital.fr/2024/06/11/apple-intelligence-la-marque-a-la-pomme-booste-ses-appareils-a-lia/",
+        "keywords": "Apple Intelligence, Siri, ChatGPT, grand public",
+        "points": [
+          "Lors de la WWDC 2024, Apple présente « Apple Intelligence », son ensemble de fonctions d'IA générative pour iOS 18.",
+          "Siri est refondu et peut faire appel à ChatGPT d'OpenAI pour certaines demandes.",
+          "Une partie des traitements se fait sur l'appareil, le reste sur des serveurs Apple ; seuls les appareils récents sont compatibles."
+        ],
+        "impact": "Impact limité pour l'entreprise : c'est une annonce grand public, mais l'arrivée de ChatGPT dans les téléphones pose la question des données professionnelles sur les appareils des salariés.",
+        "avis": "À compléter : ton avis en une ou deux phrases.",
+        "notes": {
+          "pertinence": 1,
+          "date": 2,
+          "auteur": 3
         }
       },
       {
@@ -677,6 +725,30 @@
           "date": 2,
           "auteur": 4
         }
+      },
+      {
+        "date": "30 mars 2023",
+        "iso": "2023-03-30",
+        "cat": "IA",
+        "type": "Technologique",
+        "title": "Goldman Sachs : l'IA générative pourrait toucher 300 millions d'emplois",
+        "source": "Le Monde Informatique",
+        "author": "La rédaction (Le Monde Informatique)",
+        "site": "lemondeinformatique.fr",
+        "url": "https://www.lemondeinformatique.fr/actualites/lire-l-ia-generative-pourrait-menacer-300-millions-d-emplois-90000.html",
+        "keywords": "IA générative, emploi, automatisation, étude",
+        "points": [
+          "Selon une étude de la banque Goldman Sachs, l'IA générative pourrait toucher l'équivalent de 300 millions d'emplois à temps plein aux États-Unis et en Europe.",
+          "Les fonctions administratives et de support seraient les plus exposées en zone euro.",
+          "La plupart des emplois seraient plutôt transformés que remplacés, avec un gain possible de 7 % du PIB mondial."
+        ],
+        "impact": "L'étude parle d'économie et d'emploi en général : elle ne dit rien de la sécurité ni du rôle du service informatique, et ses chiffres datent de 2023.",
+        "avis": "À compléter : ton avis en une ou deux phrases.",
+        "notes": {
+          "pertinence": 2,
+          "date": 1,
+          "auteur": 3
+        }
       }
     ],
     "sources": [
@@ -719,6 +791,14 @@
       {
         "label": "Le Monde Informatique : Données & IA",
         "url": "https://www.lemondeinformatique.fr/donnees-ia"
+      },
+      {
+        "label": "Siècle Digital",
+        "url": "https://siecledigital.fr/"
+      },
+      {
+        "label": "Blog ClickUp (contenu d'éditeur)",
+        "url": "https://clickup.com/fr-FR/blog"
       }
     ],
     "doc": "",
@@ -745,7 +825,7 @@
       },
       {
         "title": "Filtre à 20/40",
-        "text": "Seuls les articles qui obtiennent plus de 20/40 sont publiés sur cette page. Les autres sont écartés, mais ils restent comptés dans les statistiques."
+        "text": "Seuls les articles qui obtiennent plus de 20/40 sont retenus. Les autres sont écartés : ils restent visibles à part, dans la section « Articles écartés », pour montrer ce que la méthode filtre, et ils sont comptés dans les statistiques."
       },
       {
         "title": "Mon analyse",
