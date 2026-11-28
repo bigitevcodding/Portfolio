@@ -447,6 +447,46 @@
     "intro": "Je suis l'arrivée de l'IA générative et des agents IA dans les entreprises : ce qu'ils apportent, les risques qu'ils créent pour la sécurité et les données, et le cadre légal qui les encadre.",
     "articles": [
       {
+        "date": "27 novembre 2026",
+        "iso": "2026-11-27",
+        "cat": "Réglementation",
+        "type": "Juridique / réglementaire",
+        "title": "IA en santé : la CNIL et la HAS publient un guide de bon usage pour les établissements",
+        "source": "Haute Autorité de santé (HAS) et CNIL",
+        "author": "HAS et CNIL",
+        "site": "has-sante.fr",
+        "url": "https://www.has-sante.fr/jcms/p_4619911/fr/ia-en-sante-la-has-et-la-cnil-posent-les-reperes-d-un-usage-sur-et-responsable",
+        "keywords": "IA, santé, RGPD, supervision humaine, gouvernance",
+        "points": [
+          "La CNIL et la HAS publient un guide commun pour les professionnels et établissements de santé qui utilisent des outils d'IA.",
+          "Il est organisé en 11 fiches qui couvrent tout le cycle de vie : gouvernance, achat et contrats, formation, information des patients, traçabilité et suivi.",
+          "Le professionnel reste responsable de ses décisions : la supervision humaine est obligatoire et la réutilisation des données de santé doit être surveillée."
+        ],
+        "impact": "Avant de déployer un outil d'IA, le service informatique doit prévoir avec la direction qui le pilote, comment ses usages sont tracés et quelles données il peut utiliser.",
+        "avis": "À compléter : ton avis en une ou deux phrases.",
+        "notes": {}
+      },
+      {
+        "date": "25 novembre 2026",
+        "iso": "2026-11-25",
+        "cat": "Cybersécurité",
+        "type": "Cybersécurité",
+        "title": "CrowdStrike rachète Zscaler et veut un « kill switch » unique pour couper les agents IA",
+        "source": "Le Monde Informatique",
+        "author": "Hanna Elgodjam",
+        "site": "lemondeinformatique.fr",
+        "url": "https://www.lemondeinformatique.fr/donnees-ia/crowdstrike-et-zscaler-veulent-un-kill-switch-unifie-pour-les-agents-ia",
+        "keywords": "agents IA, kill switch, Zero Trust, EDR, SIEM",
+        "points": [
+          "CrowdStrike annonce le rachat de Zscaler pour environ 43,9 milliards de dollars, une opération qui doit encore être validée par les autorités.",
+          "Son bouton d'arrêt d'urgence pour agents IA fonctionne déjà sur les postes ; il doit être étendu aux connexions réseau grâce au Zero Trust de Zscaler.",
+          "Le but est de pouvoir stopper un agent IA incontrôlé et couper toutes ses communications depuis une seule console."
+        ],
+        "impact": "Les entreprises doivent prévoir dès maintenant un moyen fiable d'arrêter un agent IA qui dérape, sur les postes comme sur le réseau.",
+        "avis": "À compléter : ton avis en une ou deux phrases.",
+        "notes": {}
+      },
+      {
         "date": "30 octobre 2026",
         "cat": "Cybersécurité",
         "title": "L'ANSSI publie ses sept principes pour sécuriser l'IA agentique",
@@ -671,6 +711,14 @@
       {
         "label": "Blog du Modérateur",
         "url": "https://www.blogdumoderateur.com/"
+      },
+      {
+        "label": "HAS : actualités et communiqués",
+        "url": "https://www.has-sante.fr/"
+      },
+      {
+        "label": "Le Monde Informatique : Données & IA",
+        "url": "https://www.lemondeinformatique.fr/donnees-ia"
       }
     ],
     "doc": "",
