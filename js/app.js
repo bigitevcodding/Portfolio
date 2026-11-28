@@ -380,14 +380,10 @@ function certsHTML() {
       </article>`).join('')}</div>
   </div>`;
 }
-// Veille : score = notes × poids (sur 40). Seuls les articles au-dessus du seuil sont publiés.
-const V_CRIT = [['pertinence', 'Pertinence'], ['date', 'Date / actualité'], ['auteur', "Fiabilité de l'auteur"]];
-function vScore(a, V) {
-  const n = a.notes || {}, w = V.weights || { pertinence: 3, date: 4, auteur: 3 };
-  if (!V_CRIT.every(([k]) => n[k] >= 1)) return null;
-  return V_CRIT.reduce((s, [k]) => s + n[k] * (w[k] || 0), 0);
-}
-const vMax = V => 4 * V_CRIT.reduce((s, [k]) => s + ((V.weights || {})[k] || 0), 0) || 40;
+// Veille : chaque article reçoit une note sur 40. Seuls les articles au-dessus du seuil sont retenus.
+const V_MAX = 40;
+function vScore(a) { const n = Number(a.note); return a.note !== undefined && a.note !== '' && Number.isFinite(n) && n >= 0 && n <= V_MAX ? Math.round(n) : null; }
+const vMax = () => V_MAX;
 // Veille : une carte = un article, un clic ouvre sa fiche détaillée
 const vReco = (s, V) => { const max = vMax(V), seuil = V.threshold ?? 20; return s === null ? ['À noter', 'mid'] : s >= .75 * max ? ['Retenu', 'ok'] : s > seuil ? ['À vérifier', 'mid'] : ['Écarté', 'no']; };
 function vGroup(title, arr, max, seuil, adm, intro) {
@@ -412,14 +408,13 @@ const V_HINTS = {
 let vDlg = null, vCur = -1;
 function vDialogHTML(i) {
   const V = CONFIG.veille || {}, a = (V.articles || [])[i]; if (!a) return '';
-  const s = vScore(a, V), max = vMax(V), seuil = V.threshold ?? 20, r = vReco(s, V), w = V.weights || {}, n = a.notes || {}, adm = isAdm();
+  const s = vScore(a), max = V_MAX, seuil = V.threshold ?? 20, r = vReco(s, V), adm = isAdm();
   const kw = String(a.keywords || '').split(',').map(x => x.trim()).filter(Boolean);
   return `<div class="v-dlg-in">
     <div class="v-dlg-top">
       <div class="v-dlg-score v-${r[1]}"><b>${s === null ? '—' : s}<small>/${max}</small></b><span>${esc(r[0])}</span></div>
       <button type="button" class="v-dlg-x" data-vclose aria-label="Fermer">✕</button>
     </div>
-    <div class="v-dlg-crit">${V_CRIT.map(([k, l]) => `<div><span>${esc(l)}</span><b>${n[k] ? `${n[k]}/4` : '—'}</b><small>×${esc(w[k] ?? '—')}</small></div>`).join('')}</div>
     <p class="v-dlg-meta">${a.cat ? `<span class="v-cat">${esc(a.cat)}</span>` : ''}<span>${esc(a.date || '')}</span></p>
     <h2 id="v-dlg-title">${esc(a.title || '')}</h2>
     ${(a.points || []).length ? `<h3>Résumé</h3><ul class="v-pts">${a.points.map(x => `<li>${inline(x)}</li>`).join('')}</ul>` : ''}
@@ -435,9 +430,15 @@ function vDialogHTML(i) {
     ${a.url ? `<a class="btn v-dlg-link" href="${safeUrl(a.url)}" target="_blank" rel="noopener noreferrer">Lire l'article original ↗</a>` : ''}
     ${adm ? `<div class="v-rate-box" id="v-rate-box">
       <h3>Ma note</h3>
-      <p class="v-gintro">Choisis une note de 1 à 4 pour chaque critère. Le score se calcule tout seul. Seuil de publication : plus de ${seuil}/${max}.</p>
-      ${V_CRIT.map(([k, l]) => `<fieldset class="v-rate-row"><legend>${esc(l)} <small>×${esc(w[k] ?? '—')}</small></legend>
-        <div class="v-seg">${[1, 2, 3, 4].map(v => `<button type="button" data-vnote="${k}" data-val="${v}" aria-pressed="${n[k] === v}"><b>${v}</b><span>${esc(V_HINTS[k][v - 1])}</span></button>`).join('')}</div></fieldset>`).join('')}
+      <p class="v-gintro">Donne une note sur ${max} en pensant à la pertinence, à la date et à la fiabilité de l'auteur. Plus de ${seuil}/${max} : article retenu. ${seuil} ou moins : article écarté.</p>
+      <label class="v-avis-lbl" for="v-note">Note sur ${max}</label>
+      <div class="v-note-in">
+        <input id="v-note" type="number" inputmode="numeric" min="0" max="${max}" step="1" value="${s === null ? '' : s}" placeholder="—" aria-describedby="v-note-st">
+        <span class="v-note-max">/${max}</span>
+        <span id="v-note-st" class="v-score v-${r[1]}">${s === null ? 'Pas encore noté' : r[0]}</span>
+      </div>
+      <input id="v-note-range" class="v-note-range" type="range" min="0" max="${max}" step="1" value="${s === null ? seuil : s}" aria-label="Note sur ${max}">
+      <div class="v-note-scale" aria-hidden="true"><span>0</span><span>Écarté ≤ ${seuil}</span><span>${max}</span></div>
       <label class="v-avis-lbl" for="v-avis">Mon avis (une ou deux phrases)</label>
       <textarea id="v-avis" rows="4" placeholder="Ce que tu penses de cet article…">${esc(isTodo(a.avis) ? '' : a.avis || '')}</textarea>
       <p class="v-gintro">Tes changements s'affichent tout de suite. Pour les mettre en ligne, clique sur <b>Publier</b> dans la barre d'administration.</p>
@@ -450,11 +451,9 @@ function vOpen(i, toRate) {
     document.body.append(vDlg);
     vDlg.addEventListener('click', e => {
       if (e.target === vDlg || e.target.closest('[data-vclose]')) return vDlg.close();
-      const b = e.target.closest('[data-vnote]'); if (!b || !isAdm()) return;
-      const a = CONFIG.veille.articles[vCur]; a.notes = a.notes || {};
-      a.notes[b.dataset.vnote] = +b.dataset.val; vRefresh();
     });
     vDlg.addEventListener('input', e => {
+      if ((e.target.id === 'v-note' || e.target.id === 'v-note-range') && isAdm()) return vSetNote(e.target);
       if (e.target.id !== 'v-avis' || !isAdm()) return;
       const a = CONFIG.veille.articles[vCur], t = e.target.value.trim();
       a.avis = t || 'À compléter : ton avis en une ou deux phrases.';
@@ -467,10 +466,13 @@ function vOpen(i, toRate) {
   root.classList.add('v-dlg-open');
   if (toRate) { const r = $('#v-rate-box', vDlg); r && r.scrollIntoView({ block: 'start' }); }
 }
-function vRefresh() {
-  const box = $('#v-rate-box', vDlg), y = vDlg.scrollTop, avis = $('#v-avis', vDlg), val = avis ? avis.value : null;
-  vDlg.innerHTML = vDialogHTML(vCur); vDlg.scrollTop = y;
-  if (val !== null && $('#v-avis', vDlg)) $('#v-avis', vDlg).value = val;
+function vSetNote(el) {
+  const a = CONFIG.veille.articles[vCur], V = CONFIG.veille, raw = String(el.value).trim(), num = $('#v-note', vDlg), rng = $('#v-note-range', vDlg);
+  if (raw === '') delete a.note; else a.note = Math.max(0, Math.min(V_MAX, Math.round(+raw) || 0));
+  if (el === rng) num.value = a.note; else if (a.note !== undefined) rng.value = a.note;
+  const s = vScore(a), r = vReco(s, V), st = $('#v-note-st', vDlg), top = $('.v-dlg-score', vDlg);
+  st.className = `v-score v-${r[1]}`; st.textContent = s === null ? 'Pas encore noté' : r[0];
+  top.className = `v-dlg-score v-${r[1]}`; top.innerHTML = `<b>${s === null ? '—' : s}<small>/${V_MAX}</small></b><span>${esc(r[0])}</span>`;
   window.ADMIN && window.ADMIN.changed && window.ADMIN.changed();
 }
 document.addEventListener('click', e => {
@@ -479,7 +481,7 @@ document.addEventListener('click', e => {
 }, true);
 function veilleHTML() {
   const V = CONFIG.veille || { articles: [], sources: [] }, S = V.sources || [], seuil = V.threshold ?? 20, max = vMax(V);
-  const all = (V.articles || []).map((a, i) => ({ ...a, _s: vScore(a, V), _i: i }));
+  const all = (V.articles || []).map((a, i) => ({ ...a, _s: vScore(a), _i: i }));
   const pub = all.filter(a => a._s !== null && a._s > seuil), out = all.filter(a => a._s !== null && a._s <= seuil), todo = all.filter(a => a._s === null);
   const adm = window.ADMIN && window.ADMIN.on, shown = adm ? all : pub;
   const avg = pub.length ? pub.reduce((s, a) => s + a._s, 0) / pub.length : 0;
@@ -525,30 +527,29 @@ function veilleHTML() {
         <div><p class="mono muted">Par année de parution</p>${bars(count(pub, yearOf).sort((x, y) => y[0].localeCompare(x[0])))}</div>
         <div><p class="mono muted">Par source</p>${bars(count(pub, a => a.source).slice(0, 6))}</div>
       </div>
-      <p class="mono muted v-upd">Calculé automatiquement à partir des notes</p>
+      <p class="mono muted v-upd">Calculé automatiquement à partir des notes sur 40</p>
     </div></section>
     <section class="sec"><h3 class="mono muted">Méthodologie</h3><div class="sec-body">
       <div class="v-flow">${['Claude', 'GitHub', 'Moi : lecture et note', `Filtre > ${seuil}/${max}`, 'Vercel'].map(x => `<span>${esc(x)}</span>`).join('<i>→</i>')}</div>
       <ol class="v-steps">${(V.steps || []).map((s, i) => `<li><span class="mono">${String(i + 1).padStart(2, '0')}</span><div><h4>${esc(s.title || '')}</h4><p>${inline(s.text || '')}</p></div></li>`).join('')}</ol>
-      <p class="v-grid-note">Barème : ${V_CRIT.map(([k, l]) => `${esc(l)} ×${esc((V.weights || {})[k] ?? '—')}`).join(' · ')} — chaque critère noté de 1 à 4.</p>
+      <p class="v-grid-note">Barème : une note sur 40 par article, qui tient compte de la pertinence, de la date et de la fiabilité de l'auteur.</p>
     </div></section>
     ${adm ? `
-    ${vGroup('À noter', todo, max, seuil, true, 'Clique sur « Noter » : trois notes de 1 à 4 et ton avis. Ces fiches restent masquées tant qu\'elles ne sont pas notées.')}
+    ${vGroup('À noter', todo, max, seuil, true, 'Clique sur « Noter » : une note sur 40 et ton avis. Ces fiches restent masquées tant qu\'elles ne sont pas notées.')}
     ${vGroup('Publiés', pub, max, seuil, true, `Notés à plus de ${seuil}/${max} : visibles par les visiteurs.`)}
     ${vGroup('Écartés', out, max, seuil, true, `Notés à ${seuil}/${max} ou moins : affichés à part, dans la section « Articles écartés ».`)}` : `
     ${vGroup('Articles retenus', pub, max, seuil, false, 'Clique sur un article pour lire son résumé, ma note détaillée et mon avis.')}
     ${out.length ? vGroup('Articles écartés', out, max, seuil, false, `Ces articles ont été lus et notés, mais ils n'atteignent pas ${seuil}/${max} : source peu fiable, sujet trop éloigné ou information trop ancienne. Je les garde visibles pour montrer ce que ma méthode filtre.`) : ''}`}
     <section class="sec v-tsec"><h3 class="mono muted">Tableau d'analyse des sources</h3><div class="sec-body">
-      <p class="v-tintro">Chaque source est notée de 1 à 4 sur trois critères pondérés. Seules celles à plus de ${seuil}/${max} sont publiées.</p>
+      <p class="v-tintro">Chaque source reçoit une note sur ${max}. Seules celles à plus de ${seuil}/${max} sont retenues.</p>
       <div class="v-tbl-wrap"><table class="v-tbl">
-        <thead><tr><th>N°</th><th>Titre</th><th>Auteur</th><th>Site</th><th>Date</th><th>Mots-clés</th><th>Type</th>${V_CRIT.map(([k, l]) => `<th class="c" title="${l}">${l.split(' ')[0]}<small>×${(V.weights || {})[k] ?? '—'}</small></th>`).join('')}<th class="c">Score</th><th>Recommandation</th></tr></thead>
+        <thead><tr><th>N°</th><th>Titre</th><th>Auteur</th><th>Site</th><th>Date</th><th>Mots-clés</th><th>Type</th><th class="c">Note /40</th><th>Recommandation</th></tr></thead>
         <tbody>${all.filter(a => a._s !== null).sort((x, y) => (y.iso || '').localeCompare(x.iso || '')).map((a, i) => { const r = reco(a._s); return `<tr>
           <td class="c">${i + 1}</td>
           <td class="v-t">${a.url ? `<a href="${safeUrl(a.url)}" target="_blank" rel="noopener noreferrer">${esc(a.title || '')}</a>` : esc(a.title || '')}</td>
           <td>${esc(a.author || a.source || '')}</td><td class="v-site">${esc(a.site || '')}</td>
           <td class="nw">${a.iso ? a.iso.split('-').reverse().join('/') : esc(a.date || '')}</td>
           <td class="v-kw">${esc(a.keywords || '')}</td><td>${esc(a.type || a.cat || '')}</td>
-          ${V_CRIT.map(([k]) => `<td class="c">${esc((a.notes || {})[k])}</td>`).join('')}
           <td class="c"><span class="v-sbar"><i style="width:${a._s / max * 100}%"></i><b>${a._s}</b></span></td>
           <td><span class="v-score v-${r[1]}">${r[0]}</span></td></tr>`; }).join('')}</tbody>
       </table></div>

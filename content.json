@@ -463,8 +463,7 @@
           "Le professionnel reste responsable de ses décisions : la supervision humaine est obligatoire et la réutilisation des données de santé doit être surveillée."
         ],
         "impact": "Avant de déployer un outil d'IA, le service informatique doit prévoir avec la direction qui le pilote, comment ses usages sont tracés et quelles données il peut utiliser.",
-        "avis": "Ce guide est une bonne idée, mais aujourd'hui les pirates ont eux aussi accès à des IA tout aussi performantes pour attaquer, et chaque outil d'IA ajouté dans un hôpital crée de nouvelles données à protéger. Sachant que la France est l'un des pays les plus visés par les cyberattaques, ces outils pourraient devenir une nouvelle brèche pour les pirates : des règles de bon usage ne suffiront pas sans une vraie sécurité technique derrière.",
-        "notes": {}
+        "avis": "Ce guide est une bonne idée, mais aujourd'hui les pirates ont eux aussi accès à des IA tout aussi performantes pour attaquer, et chaque outil d'IA ajouté dans un hôpital crée de nouvelles données à protéger. Sachant que la France est l'un des pays les plus visés par les cyberattaques, ces outils pourraient devenir une nouvelle brèche pour les pirates : des règles de bon usage ne suffiront pas sans une vraie sécurité technique derrière."
       },
       {
         "date": "25 novembre 2026",
@@ -483,8 +482,7 @@
           "Le but est de pouvoir stopper un agent IA incontrôlé et couper toutes ses communications depuis une seule console."
         ],
         "impact": "Les entreprises doivent prévoir dès maintenant un moyen fiable d'arrêter un agent IA qui dérape, sur les postes comme sur le réseau.",
-        "avis": "Ce rachat me paraît être un bon projet : réunir la protection des postes et le Zero Trust réseau permettra d'arrêter un agent IA incontrôlé en un seul clic, et ce kill switch répond à un vrai besoin de sécurité pour les entreprises.",
-        "notes": {}
+        "avis": "Ce rachat me paraît être un bon projet : réunir la protection des postes et le Zero Trust réseau permettra d'arrêter un agent IA incontrôlé en un seul clic, et ce kill switch répond à un vrai besoin de sécurité pour les entreprises."
       },
       {
         "date": "30 octobre 2026",
@@ -504,11 +502,7 @@
         "site": "cyber.gouv.fr",
         "keywords": "IA agentique, agents IA, autonomie, contrôle humain, journalisation",
         "type": "Cybersécurité",
-        "notes": {
-          "pertinence": 4,
-          "date": 4,
-          "auteur": 4
-        }
+        "note": 40
       },
       {
         "date": "9 octobre 2026",
@@ -528,11 +522,7 @@
         "site": "next.ink",
         "keywords": "agents IA, cyberattaques, défense, ANSSI",
         "type": "Cybersécurité",
-        "notes": {
-          "pertinence": 3,
-          "date": 4,
-          "auteur": 3
-        }
+        "note": 34
       },
       {
         "date": "29 juin 2026",
@@ -552,11 +542,7 @@
         "site": "beuc.eu",
         "keywords": "AI Act, omnibus numérique, haut risque, réglementation",
         "type": "Juridique / réglementaire",
-        "notes": {
-          "pertinence": 3,
-          "date": 4,
-          "auteur": 3
-        }
+        "note": 34
       },
       {
         "date": "15 avril 2026",
@@ -576,11 +562,7 @@
         "site": "blogdumoderateur.com",
         "keywords": "agents IA, OpenClaw, poste de travail, fuite de données",
         "type": "Cybersécurité",
-        "notes": {
-          "pertinence": 4,
-          "date": 4,
-          "auteur": 3
-        }
+        "note": 37
       },
       {
         "date": "4 février 2026",
@@ -600,11 +582,7 @@
         "site": "cyber.gouv.fr",
         "keywords": "IA générative, menace, cyberattaques, empoisonnement",
         "type": "Cybersécurité",
-        "notes": {
-          "pertinence": 4,
-          "date": 4,
-          "auteur": 4
-        }
+        "note": 40
       },
       {
         "date": "14 décembre 2024",
@@ -624,11 +602,7 @@
         ],
         "impact": "Un service informatique ne peut pas choisir un outil d'IA à partir d'un comparatif écrit par un éditeur : il faut des tests internes et une vérification sécurité et RGPD.",
         "avis": "À compléter : ton avis en une ou deux phrases.",
-        "notes": {
-          "pertinence": 2,
-          "date": 2,
-          "auteur": 1
-        }
+        "note": 17
       },
       {
         "date": "4 octobre 2024",
@@ -648,11 +622,7 @@
         "site": "cyber.gouv.fr",
         "keywords": "assistants de code, IA, développement sécurisé",
         "type": "Cybersécurité",
-        "notes": {
-          "pertinence": 3,
-          "date": 2,
-          "auteur": 4
-        }
+        "note": 29
       },
       {
         "date": "11 juin 2024",
@@ -672,11 +642,7 @@
         ],
         "impact": "Impact limité pour l'entreprise : c'est une annonce grand public, mais l'arrivée de ChatGPT dans les téléphones pose la question des données professionnelles sur les appareils des salariés.",
         "avis": "À compléter : ton avis en une ou deux phrases.",
-        "notes": {
-          "pertinence": 1,
-          "date": 2,
-          "auteur": 3
-        }
+        "note": 20
       },
       {
         "date": "29 avril 2024",
@@ -696,11 +662,7 @@
         "site": "cyber.gouv.fr",
         "keywords": "IA générative, recommandations, cycle de vie, sécurité",
         "type": "Cybersécurité",
-        "notes": {
-          "pertinence": 4,
-          "date": 2,
-          "auteur": 4
-        }
+        "note": 32
       },
       {
         "date": "8 avril 2024",
@@ -720,11 +682,7 @@
         "site": "cnil.fr",
         "keywords": "RGPD, IA, données personnelles, conformité",
         "type": "Juridique / réglementaire",
-        "notes": {
-          "pertinence": 3,
-          "date": 2,
-          "auteur": 4
-        }
+        "note": 29
       },
       {
         "date": "30 mars 2023",
@@ -744,11 +702,7 @@
         ],
         "impact": "L'étude parle d'économie et d'emploi en général : elle ne dit rien de la sécurité ni du rôle du service informatique, et ses chiffres datent de 2023.",
         "avis": "À compléter : ton avis en une ou deux phrases.",
-        "notes": {
-          "pertinence": 2,
-          "date": 1,
-          "auteur": 3
-        }
+        "note": 19
       }
     ],
     "sources": [
@@ -804,11 +758,6 @@
     "doc": "",
     "docLabel": "Ma présentation (PDF)",
     "table": "docs/veille-sources.xlsx",
-    "weights": {
-      "pertinence": 3,
-      "date": 4,
-      "auteur": 3
-    },
     "threshold": 20,
     "steps": [
       {
@@ -821,11 +770,11 @@
       },
       {
         "title": "Lecture et notation",
-        "text": "Je lis moi-même chaque article source et je le note de 1 à 4 sur trois critères : pertinence (poids 3), date et actualité (poids 4), fiabilité de l'auteur (poids 3). J'obtiens un score sur 40."
+        "text": "Je lis moi-même chaque article source et je lui donne une note sur 40, en tenant compte de sa pertinence pour mon sujet, de sa date et de la fiabilité de son auteur."
       },
       {
         "title": "Filtre à 20/40",
-        "text": "Seuls les articles qui obtiennent plus de 20/40 sont retenus. Les autres sont écartés : ils restent visibles à part, dans la section « Articles écartés », pour montrer ce que la méthode filtre, et ils sont comptés dans les statistiques."
+        "text": "Seuls les articles notés à plus de 20/40 sont retenus. Les autres sont écartés : ils restent visibles à part, dans la section « Articles écartés », pour montrer ce que la méthode filtre, et ils sont comptés dans les statistiques."
       },
       {
         "title": "Mon analyse",
@@ -833,7 +782,7 @@
       },
       {
         "title": "Publication",
-        "text": "Je valide la pull request : Vercel redéploie automatiquement le site, et le tableau d'analyse Excel est régénéré à partir des mêmes notes."
+        "text": "Je valide la pull request : Vercel redéploie automatiquement le site, et le tableau d'analyse Excel est régénéré à partir des mêmes notes sur 40."
       }
     ]
   }
